@@ -39,10 +39,11 @@ $RECYCLE.BIN/
 .Trashes
 .VolumeIcon.icns
 
-/ALS-SOD1 papers/
+/ALS-SOD1 bibliography/
 /PCA_data/
 /Photos/
 /Processed_images/
+/Paper/
 /*.docx
 /*.xls
 /*.xlsx

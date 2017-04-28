@@ -125,7 +125,7 @@ function PCA_2_cc_Original(m_t1,m_t2,n_t1,n_t2)
     Proy = Proy{numRow};
 
 
-    save( ['D:\Pedro\Mouse muscle SOD1\PCA_data\PCA_data_by_groups\PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs)], 'BettersPCAEachStep', 'Proy', 'bestPCA','indexesCcsSelected', 'eigenvectors')
+    save( ['D:\Pedro\MouseMuscleSOD1\PCA_data\PCA_data_by_groups\PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs)], 'BettersPCAEachStep', 'Proy', 'bestPCA','indexesCcsSelected', 'eigenvectors')
 
     
     switch lower(n_t1(1:2))
@@ -161,7 +161,7 @@ function PCA_2_cc_Original(m_t1,m_t2,n_t1,n_t2)
     stringres=strcat('PCA analysis selected features:',num2str(indexesCcsSelected),' Descriptor: ',num2str(bestPCA));
     title(stringres)
     legend(n_t1,n_t2, 'Location', 'bestoutside')
-    saveas(h,['D:\Pedro\Mouse muscle SOD1\PCA_data\PCA_data_by_groups\PCA_' n_t1 '_' n_t2 '.jpg'])
+    saveas(h,['D:\Pedro\MouseMuscleSOD1\PCA_data\PCA_data_by_groups\PCA_' n_t1 '_' n_t2 '.jpg'])
 
     close all
 end

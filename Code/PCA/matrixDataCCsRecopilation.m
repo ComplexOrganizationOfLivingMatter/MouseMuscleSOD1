@@ -3,7 +3,7 @@ matrixCONT60=[];
 
 for i=1:length(CONT60)
     pathFile=CONT60{i};
-    if strfind(pathFile,'69_cc.mat')
+    if strfind(pathFile,'69_cc.mat') & strfind(lower(pathFile),'sol')
         load(pathFile)
         Mean_relation_axis=mean(Mean_relation_axis);
         pathFileDapi=pathFile(1:end-17);
@@ -26,7 +26,7 @@ matrixG93A60=[];
 
 for i=1:length(G93A60)
     pathFile=G93A60{i};
-    if strfind(pathFile,'69_cc.mat')
+    if strfind(pathFile,'69_cc.mat') & strfind(lower(pathFile),'sol')
         load(pathFile)
         Mean_relation_axis=mean(Mean_relation_axis);
         pathFileDapi=pathFile(1:end-17);
