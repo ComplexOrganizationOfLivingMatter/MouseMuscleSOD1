@@ -12,8 +12,8 @@ function [slow_cells,fast_cells]=discriminate_cells_color(cellular_mask, Img,val
     Mean_R = cat(1, Mean_R.MeanIntensity);
 
     %A cell will be a slow cell if the 15% of RED intensity of cellular region
-    %is >=100, or his average is > 65.(this values could be modified depends of
-    %the intensity image), else cell will be a fast cell.
+    %is >=100, or his average is > 65.(this values could be modified
+    %depends on the intensity image), else cell will be a fast cell.
     for i=1:max(max(cellular_mask))
         Intensities=R(cellular_mask==i);
         n_int=length(find(Intensities>=100));

@@ -10,6 +10,10 @@ function Main_correction(folder,name)
     load([path_folder '\Data_image\Data_cc.mat'])
     load([path_folder '\Data_image\Needed_images.mat'])
 
+    if exist([path_folder '\slow_fast_cells_correction.mat'],'file')
+        load([path_folder '\slow_fast_cells_correction.mat'])
+    end
+    
     %this function let modify type of cells
     [slow_cells,fast_cells,old_slow_cells,old_fast_cells]=pick_type_cells(folder, name,fast_cells,slow_cells,valid_cells,improved_mask);
 
