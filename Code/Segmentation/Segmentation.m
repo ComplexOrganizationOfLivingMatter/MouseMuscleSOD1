@@ -36,7 +36,7 @@ Delete_artifacts=12000; % It's depends of min size cell
     Img=Img_r+Img_g+Img_b;
     Img2=Img_r+Img_g_original+Img_b;
     R=Img(:,:,1);
-    G=Img(:,:,2);
+    G=rgb2gray(Img_g);%Img(:,:,2);
     B=Img(:,:,3);
     [H,W,c]=size(Img);
     
