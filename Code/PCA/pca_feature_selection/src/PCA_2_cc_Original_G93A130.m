@@ -1,5 +1,5 @@
 %%PCA_2_cc
-function PCA_2_cc_Original(m_t1,m_t2,m_t3,n_t1,n_t2)
+function PCA_2_cc_Original_G93A130(m_t1,m_t2,m_t3,n_t1,n_t2,path2save)
 
     %Summary of process:
     % 1-Calculate 10 betters trios
@@ -130,7 +130,7 @@ function PCA_2_cc_Original(m_t1,m_t2,m_t3,n_t1,n_t2)
     Proy = Proy{numRow};
 
 
-    save( ['D:\Pedro\MouseMuscleSOD1\PCA_data\PCA_data_by_groups\PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs)], 'BettersPCAEachStep', 'Proy', 'bestPCA','indexesCcsSelected', 'eigenvectors')
+    save( [path2save 'PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs)], 'BettersPCAEachStep', 'Proy', 'bestPCA','indexesCcsSelected', 'eigenvectors')
 
     switch lower(n_t1(1:2))
         
@@ -160,15 +160,28 @@ function PCA_2_cc_Original(m_t1,m_t2,m_t3,n_t1,n_t2)
     
     %%Represent Luisma format
     Proyecc=Proy;
-    h=figure; plot(Proyecc(1,1:nImgType1),Proyecc(2,1:nImgType1),'.','Color',color1,'MarkerSize',30)
-    hold on, plot(Proyecc(1,nImgType1+1:nImgType1+nImgType2),Proyecc(2,nImgType1+1:nImgType1+nImgType2),'.','Color',color2,'MarkerSize',30)
-    hold on, plot(Proyecc(1,nImgType1+nImgType2+1:nImgType1+nImgType2+nImgType3),Proyecc(2,nImgType1+nImgType2+1:nImgType1+nImgType2+nImgType3),'.','Color',color3,'MarkerSize',30)
-    
+    h=figure('Position', get(0, 'Screensize')); 
+    plot(Proyecc(1,1:nImgType1),Proyecc(2,1:nImgType1),'.','Color',color1,'MarkerSize',45)
+    hold on, plot(Proyecc(1,nImgType1+1:nImgType1+nImgType2),Proyecc(2,nImgType1+1:nImgType1+nImgType2),'.','Color',color2,'MarkerSize',45)
+    hold on, plot(Proyecc(1,nImgType1+nImgType2+1:nImgType1+nImgType2+nImgType3),Proyecc(2,nImgType1+nImgType2+1:nImgType1+nImgType2+nImgType3),'.','Color',color3,'MarkerSize',45)
+
     %stringres=strcat(num2str(indexesCcsSelected));
     stringres=strcat('PCA analysis selected features:',num2str(indexesCcsSelected),' Descriptor: ',num2str(bestPCA));
     title(stringres)
     legend(n_t1,n_t2, 'Location', 'bestoutside')
-    saveas(h,['D:\Pedro\MouseMuscleSOD1\PCA_data\PCA_data_by_groups\PCA_' n_t1 '_' n_t2 '.jpg'])
-
+    set(gca,'FontSize', 20)
+    set(gcf,'color','white')
+    
+    pause(2)
+        
+    F = getframe(h);
+    imwrite(F.cdata, [path2save 'PCA_' n_t1 '_' n_t2 '.tiff'],'Resolution', 300);
+    savefig(h,[path2save 'PCA_' n_t1 '_' n_t2 '.fig']);
+    
+    pause(10)
+    
+    clear F
+    close(gcf)
     close all
+    
 end
