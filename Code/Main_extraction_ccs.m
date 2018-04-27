@@ -18,9 +18,9 @@ folder_days = dir(PathCurrent);
 folder_days(1:2)=[];
 
 
-listOfFolder={};
+% listOfFolder={};
 
-for i=1:length(folder_days)  %problemas WT-SOD-M-120-49-SD-CMSD-2A40X
+parfor i=1:length(folder_days)  %problemas WT-SOD-M-120-49-SD-CMSD-2A40X
     
     days=folder_days(i).name;
     cd (days)
@@ -53,19 +53,19 @@ for i=1:length(folder_days)  %problemas WT-SOD-M-120-49-SD-CMSD-2A40X
             
             for l=1:length(folder_images)
 
-                folder=[days '\'  folder_type '\' folder_date]
+                folder=[days '\'  folder_type '\' folder_date];
                 name=folder_images(l).name;
                 tic 
-                %%[valid_cells]=Extraction_69ccs(folder,name);
-                '69 ccs'
+                [valid_cells]=Extraction_69ccs(folder,name);
+                disp(['69 ccs - ' folder ' - ' name])
                 toc
-                if strcmp(days,'60 days')~=1
-                    tic
-                    %%Extraction_12ccs_dapi( folder,name,valid_cells);
-                    '12 dapi ccs'
-                    toc
-                end
-                listOfFolder(end+1,1:2)={{folder},{name}};
+%                 if strcmp(days,'60 days')~=1
+%                     tic
+%                     Extraction_12ccs_dapi( folder,name,valid_cells);
+%                     '12 dapi ccs'
+%                     toc
+%                 end
+%                 listOfFolder(end+1,1:2)={{folder},{name}};
             end
             
             cd (['..\..\Photos\' days '\' folder_type])

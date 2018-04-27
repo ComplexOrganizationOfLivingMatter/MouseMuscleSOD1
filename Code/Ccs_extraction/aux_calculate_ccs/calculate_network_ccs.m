@@ -205,7 +205,7 @@ function [Mean_neighbors,Std_neighbors,Std_neighbors_of_slow,Std_neighbors_of_fa
     
     
     %CC37-38,43-44,49-50,55-56
-    if isempty(fast_cells)
+    if isempty(intersect(fast_cells,valid_cells))
 
         Mean_weights_fast_cells=0;
         Desv_weights_fast_cells=0;
@@ -218,21 +218,21 @@ function [Mean_neighbors,Std_neighbors,Std_neighbors_of_slow,Std_neighbors_of_fa
 
     else
 
-        Mean_weights_fast_cells=mean(Sum_weights_each_node((fast_cells)));
-        Desv_weights_fast_cells=std(Sum_weights_each_node((fast_cells)));
-        Mean_Coef_cluster_fast=mean(Coef_cluster(fast_cells));
-        Desv_Coef_cluster_fast=std(Coef_cluster(fast_cells));
-        Mean_excentricity_fast=mean(ecc(fast_cells));
-        Desv_excentricity_fast=std(ecc(fast_cells));
-        Mean_BC_fast=mean(BC(fast_cells));
-        Desv_BC_fast=std(BC(fast_cells));
+        Mean_weights_fast_cells=mean(Sum_weights_each_node((intersect(fast_cells,valid_cells))));
+        Desv_weights_fast_cells=std(Sum_weights_each_node((intersect(fast_cells,valid_cells))));
+        Mean_Coef_cluster_fast=mean(Coef_cluster(intersect(fast_cells,valid_cells)));
+        Desv_Coef_cluster_fast=std(Coef_cluster(intersect(fast_cells,valid_cells)));
+        Mean_excentricity_fast=mean(ecc(intersect(fast_cells,valid_cells)));
+        Desv_excentricity_fast=std(ecc(intersect(fast_cells,valid_cells)));
+        Mean_BC_fast=mean(BC(intersect(fast_cells,valid_cells)));
+        Desv_BC_fast=std(BC(intersect(fast_cells,valid_cells)));
 
 
     end
 
 
     %CC39-40,45-46,51-52,57-58
-    if isempty(slow_cells)
+    if isempty(intersect(slow_cells,valid_cells))
         Mean_weights_slow_cells=0;
         Desv_weights_slow_cells=0;
         Mean_Coef_cluster_slow=0;
@@ -243,14 +243,14 @@ function [Mean_neighbors,Std_neighbors,Std_neighbors_of_slow,Std_neighbors_of_fa
         Desv_BC_slow=0;
     else
 
-        Mean_weights_slow_cells=mean(Sum_weights_each_node((slow_cells)));
-        Desv_weights_slow_cells=std(Sum_weights_each_node((slow_cells)));
-        Mean_Coef_cluster_slow=mean(Coef_cluster(slow_cells));
-        Desv_Coef_cluster_slow=std(Coef_cluster(slow_cells));
-        Mean_excentricity_slow=mean(ecc(slow_cells));
-        Desv_excentricity_slow=std(ecc(slow_cells));
-        Mean_BC_slow=mean(BC(slow_cells));
-        Desv_BC_slow=std(BC(slow_cells));
+        Mean_weights_slow_cells=mean(Sum_weights_each_node((intersect(slow_cells,valid_cells))));
+        Desv_weights_slow_cells=std(Sum_weights_each_node((intersect(slow_cells,valid_cells))));
+        Mean_Coef_cluster_slow=mean(Coef_cluster(intersect(slow_cells,valid_cells)));
+        Desv_Coef_cluster_slow=std(Coef_cluster(intersect(slow_cells,valid_cells)));
+        Mean_excentricity_slow=mean(ecc(intersect(slow_cells,valid_cells)));
+        Desv_excentricity_slow=std(ecc(intersect(slow_cells,valid_cells)));
+        Mean_BC_slow=mean(BC(intersect(slow_cells,valid_cells)));
+        Desv_BC_slow=std(BC(intersect(slow_cells,valid_cells)));
 
     end
 
@@ -270,8 +270,8 @@ function [Mean_neighbors,Std_neighbors,Std_neighbors_of_slow,Std_neighbors_of_fa
     Desv_dist=std(M(M~=0));
 
     %CC61-62
-    if ~isempty(fast_cells) 
-        M1=triu(Matrix_shortest_distances_all_nodes(fast_cells,fast_cells));
+    if ~isempty(intersect(fast_cells,valid_cells)) 
+        M1=triu(Matrix_shortest_distances_all_nodes(intersect(fast_cells,valid_cells),intersect(fast_cells,valid_cells)));
         Mean_dist_fast_fast=mean(M1(M1~=0));
         Desv_dist_fast_fast=std(M1(M1~=0));
     else
@@ -280,8 +280,8 @@ function [Mean_neighbors,Std_neighbors,Std_neighbors_of_slow,Std_neighbors_of_fa
     end
 
     %CC63-64
-    if ~isempty(slow_cells) 
-        M3=triu(Matrix_shortest_distances_all_nodes(slow_cells,slow_cells));
+    if ~isempty(intersect(slow_cells,valid_cells)) 
+        M3=triu(Matrix_shortest_distances_all_nodes(intersect(slow_cells,valid_cells),intersect(slow_cells,valid_cells)));
         Mean_dist_slow_slow=mean(M3(M3~=0));
         Desv_dist_slow_slow=std(M3(M3~=0));
     else
@@ -290,12 +290,12 @@ function [Mean_neighbors,Std_neighbors,Std_neighbors_of_slow,Std_neighbors_of_fa
     end
 
     %CC65-CC68
-    if ~isempty(slow_cells) && ~isempty(fast_cells)
-        M2=triu(Matrix_shortest_distances_all_nodes(fast_cells,slow_cells));
+    if ~isempty(intersect(slow_cells,valid_cells)) && ~isempty(intersect(fast_cells,valid_cells)) 
+        M2=triu(Matrix_shortest_distances_all_nodes(fast_cells,intersect(slow_cells,valid_cells)));
         Mean_dist_fast_slow=mean(M2(M2~=0));
         Desv_dist_fast_slow=std(M2(M2~=0));
 
-        M4=triu(Matrix_shortest_distances_all_nodes(slow_cells,fast_cells));
+        M4=triu(Matrix_shortest_distances_all_nodes(intersect(slow_cells,valid_cells),intersect(fast_cells,valid_cells)));
         Mean_dist_slow_fast=mean(M4(M4~=0));
         Desv_dist_slow_fast=std(M4(M4~=0));
 
