@@ -26,17 +26,17 @@ name2={'Control 80','Control 100','Control 120','Control 100','Control 120','Con
 indexesM1={indCONT60,indCONT60,indCONT60,indCONT80,indCONT80,indCONT100,indG93A60,indG93A60,indG93A80,indWT80,indWT80,indWT100,indCONT60,indCONT80,indWT80,indWT80,indCONT100,indWT100,indWT100,indWT120};
 indexesM2={indCONT80,indCONT100,indCONT120,indCONT100,indCONT120,indCONT120,indG93A80,indG93A100,indG93A100,indWT100,indWT120,indWT120,indG93A60,indG93A80,indCONT80,indG93A80,indG93A100,indCONT100,indG93A100,indCONT120};
 
-% for i=1:length(m1)
-%     matrix1=vertcat(cell2mat(m1{i}(:,2)));
-%     matrix2=vertcat(cell2mat(m2{i}(:,2)));
-%     
-%     if strfind([name1{i},name2{i}],'60')>0
-%         %PCA_2_cc_Original(matrix1, matrix2, 'Class1', 'Class2');
-%         PCA_2_cc_Original(matrix1(indexesM1{i},1:69),matrix2(indexesM2{i},1:69),name1{i},name2{i},path2save);
-%     else
-%         PCA_2_cc_Original(matrix1(indexesM1{i},:),matrix2(indexesM2{i},:),name1{i},name2{i},path2save);
-%     end
-% end
+for i=1:length(m1)
+    matrix1=vertcat(cell2mat(m1{i}(:,2)));
+    matrix2=vertcat(cell2mat(m2{i}(:,2)));
+    
+    if strfind([name1{i},name2{i}],'60')>0
+        %PCA_2_cc_Original(matrix1, matrix2, 'Class1', 'Class2');
+        PCA_2_cc_Original(matrix1(indexesM1{i},1:69),matrix2(indexesM2{i},1:69),name1{i},name2{i},path2save);
+    else
+        PCA_2_cc_Original(matrix1(indexesM1{i},:),matrix2(indexesM2{i},:),name1{i},name2{i},path2save);
+    end
+end
 
 m1={matrixG93A60,matrixG93A80,matrixG93A100,matrixCONT120,matrixWT120};
 m2={matrixG93A120,matrixG93A120,matrixG93A120,matrixG93A120,matrixG93A120};
