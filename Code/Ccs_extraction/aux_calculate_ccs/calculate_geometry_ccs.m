@@ -10,20 +10,23 @@ function [Mean_Area,Std_Area,Mean_slow_cells_area,Std_slow_cells_area,Mean_fast_
     Area_valid_cells=cell_area(valid_cells);
     Mean_Area=mean(Area_valid_cells);
     Std_Area=std(Area_valid_cells);
+    
+    slow_valid_cells=intersect(valid_cells,slow_cells);
+    fast_valid_cells=intersect(valid_cells,fast_cells);
   
     % Number of slow and fast cells 
-    n_slow_cells=length(slow_cells);
-    n_fast_cells=length(fast_cells);
+    n_slow_cells=length(slow_valid_cells);
+    n_fast_cells=length(fast_valid_cells);
 
     % CC69
     Average_slow_cells=n_slow_cells/(n_fast_cells+n_slow_cells);
 
     % CC3-CC6
     %Slow and fast cells area
-    Mean_slow_cells_area=mean(cell_area(slow_cells));
-    Std_slow_cells_area=std(cell_area(slow_cells));
-    Mean_fast_cells_area=mean(cell_area(fast_cells));
-    Std_fast_cells_area=std(cell_area(fast_cells));
+    Mean_slow_cells_area=mean(cell_area(slow_valid_cells));
+    Std_slow_cells_area=std(cell_area(slow_valid_cells));
+    Mean_fast_cells_area=mean(cell_area(fast_valid_cells));
+    Std_fast_cells_area=std(cell_area(fast_valid_cells));
 
     % CC7-CC10
     %elongation (major and minor axis cells)

@@ -17,7 +17,7 @@ function Main_correction(folder,name)
     %this function let modify type of cells
     [slow_cells,fast_cells,old_slow_cells,old_fast_cells]=pick_type_cells(folder, name,fast_cells,slow_cells,valid_cells,improved_mask);
 
-    
+    addpath(genpath('..'))
 
     % Calculate 15 geometry ccs: CC1-CC14 & CC69
     [Mean_Area,Std_Area,Mean_slow_cells_area,Std_slow_cells_area,Mean_fast_cells_area,Std_fast_cells_area,Mean_major_axis,Mean_minor_axis,Mean_relation_axis,Std_relation_axis,Mean_Pix_convex_region,Std_Pix_convex_region,Mean_relation_areas,Std_relation_areas,Average_slow_cells,cell_area,major_axis,minor_axis,Pix_convex_region,Relation_valid_areas]=calculate_geometry_ccs(improved_mask,cells_L,valid_cells,contour_water,slow_cells,fast_cells);

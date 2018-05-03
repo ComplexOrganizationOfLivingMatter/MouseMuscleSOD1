@@ -291,7 +291,7 @@ function [Mean_neighbors,Std_neighbors,Std_neighbors_of_slow,Std_neighbors_of_fa
 
     %CC65-CC68
     if ~isempty(intersect(slow_cells,valid_cells)) && ~isempty(intersect(fast_cells,valid_cells)) 
-        M2=triu(Matrix_shortest_distances_all_nodes(fast_cells,intersect(slow_cells,valid_cells)));
+        M2=triu(Matrix_shortest_distances_all_nodes(intersect(fast_cells,valid_cells),intersect(slow_cells,valid_cells)));
         Mean_dist_fast_slow=mean(M2(M2~=0));
         Desv_dist_fast_slow=std(M2(M2~=0));
 
