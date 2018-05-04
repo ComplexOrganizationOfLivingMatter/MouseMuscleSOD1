@@ -4,7 +4,7 @@ pathPCAresults=[rootPath 'PCA_data_by_groups\'];
 tableCcs=readtable('..\..\docs\list_81_cc.xls');
 listOfCcs=table2cell(tableCcs);
 
-load([rootPath 'Matrix_cc_25-Apr-2018.mat'])
+load([rootPath 'Matrix_cc_04-May-2018.mat'])
 
 
 pathFilesPca=dir([pathPCAresults,'*.mat']);

@@ -1,7 +1,7 @@
 %Pipeline
 addpath('src')
 addpath('src\lib')
-load('D:\Pedro\MouseMuscleSOD1\PCA_data\Matrix_cc_25-Apr-2018.mat')
+load('..\..\..\PCA_data\Matrix_cc_04-May-2018.mat')
 path2save='..\..\..\PCA_data\PCA_data_by_groups\';
 
 
