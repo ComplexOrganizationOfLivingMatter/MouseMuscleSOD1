@@ -22,37 +22,37 @@ indG93A120=cellfun(@(x) ~(length(isnan(x))==1),matrixG93A120(:,1));
 indG93A130=cellfun(@(x) ~(length(isnan(x))==1),matrixG93A130(:,1));
 
 
-mat1={matrixCONT60,matrixCONT60,matrixCONT60,matrixCONT80,matrixCONT80,matrixCONT100,matrixG93A60,matrixG93A60,matrixG93A80,matrixWT80,matrixWT80,matrixWT100,matrixCONT60,matrixCONT80,matrixWT80,matrixWT80,matrixCONT100,matrixWT100,matrixWT100,matrixWT120};
-mat2={matrixCONT80,matrixCONT100,matrixCONT120,matrixCONT100,matrixCONT120,matrixCONT120,matrixG93A80,matrixG93A100,matrixG93A100,matrixWT100,matrixWT120,matrixWT120,matrixG93A60,matrixG93A80,matrixCONT80,matrixG93A80,matrixG93A100,matrixCONT100,matrixG93A100,matrixCONT120};
-name1={'Control 60','Control 60','Control 60','Control 80','Control 80','Control 100','G93A 60','G93A 60','G93A 80','WT 80','WT 80','WT 100','Control 60','Control 80','WT 80','WT 80','Control 100','WT 100','WT 100','WT 120'};
-name2={'Control 80','Control 100','Control 120','Control 100','Control 120','Control 120','G93A 80','G93A 100','G93A 100','WT 100','WT 120','WT 120','G93A 60','G93A 80','Control 80','G93A 80','G93A 100','Control 100','G93A 100','Control 120'};
-indexesM1={indCONT60,indCONT60,indCONT60,indCONT80,indCONT80,indCONT100,indG93A60,indG93A60,indG93A80,indWT80,indWT80,indWT100,indCONT60,indCONT80,indWT80,indWT80,indCONT100,indWT100,indWT100,indWT120};
-indexesM2={indCONT80,indCONT100,indCONT120,indCONT100,indCONT120,indCONT120,indG93A80,indG93A100,indG93A100,indWT100,indWT120,indWT120,indG93A60,indG93A80,indCONT80,indG93A80,indG93A100,indCONT100,indG93A100,indCONT120};
+% mat1={matrixCONT60,matrixCONT60,matrixCONT60,matrixCONT80,matrixCONT80,matrixCONT100,matrixG93A60,matrixG93A60,matrixG93A80,matrixWT80,matrixWT80,matrixWT100,matrixCONT60,matrixCONT80,matrixWT80,matrixWT80,matrixCONT100,matrixWT100,matrixWT100,matrixWT120};
+% mat2={matrixCONT80,matrixCONT100,matrixCONT120,matrixCONT100,matrixCONT120,matrixCONT120,matrixG93A80,matrixG93A100,matrixG93A100,matrixWT100,matrixWT120,matrixWT120,matrixG93A60,matrixG93A80,matrixCONT80,matrixG93A80,matrixG93A100,matrixCONT100,matrixG93A100,matrixCONT120};
+% name1={'Control 60','Control 60','Control 60','Control 80','Control 80','Control 100','G93A 60','G93A 60','G93A 80','WT 80','WT 80','WT 100','Control 60','Control 80','WT 80','WT 80','Control 100','WT 100','WT 100','WT 120'};
+% name2={'Control 80','Control 100','Control 120','Control 100','Control 120','Control 120','G93A 80','G93A 100','G93A 100','WT 100','WT 120','WT 120','G93A 60','G93A 80','Control 80','G93A 80','G93A 100','Control 100','G93A 100','Control 120'};
+% indexesM1={indCONT60,indCONT60,indCONT60,indCONT80,indCONT80,indCONT100,indG93A60,indG93A60,indG93A80,indWT80,indWT80,indWT100,indCONT60,indCONT80,indWT80,indWT80,indCONT100,indWT100,indWT100,indWT120};
+% indexesM2={indCONT80,indCONT100,indCONT120,indCONT100,indCONT120,indCONT120,indG93A80,indG93A100,indG93A100,indWT100,indWT120,indWT120,indG93A60,indG93A80,indCONT80,indG93A80,indG93A100,indCONT100,indG93A100,indCONT120};
 
-for i=1:length(mat1)
-    matrix1=vertcat(cell2mat(mat1{i}(:,2)));
-    matrix2=vertcat(cell2mat(mat2{i}(:,2)));
-    
-    if strfind([name1{i},name2{i}],'60')>0
-        %PCA_2_cc_Original(matrix1, matrix2, 'Class1', 'Class2');
-        PCA_2_cc_Original(matrix1(:,indexesGeometricCcs),matrix2(:,indexesGeometricCcs),name1{i},name2{i},path2save,indexesGeometricCcs);
-        
-        %delete nan due to slow - fast cells
-        m1=matrix1(indexesM1{i},1:69);
-        m2=matrix2(indexesM2{i},1:69);
-        
-        PCA_2_cc_Original(m1,m2,name1{i},name2{i},path2save);
-    else
-        PCA_2_cc_Original(matrix1(:,indexesGeometricCcs),matrix2(:,indexesGeometricCcs),name1{i},name2{i},path2save,indexesGeometricCcs);
-        PCA_2_cc_Original(matrix1(:,indexesGeometricDapiCcs),matrix2(:,indexesGeometricDapiCcs),name1{i},name2{i},path2save,indexesGeometricDapiCcs);
-        
-        %delete nan due to slow - fast cells
-        m1=matrix1(indexesM1{i},:);
-        m2=matrix2(indexesM2{i},:);
-        
-        PCA_2_cc_Original(m1,m2,name1{i},name2{i},path2save);
-    end
-end
+% for i=1:length(mat1)
+%     matrix1=vertcat(cell2mat(mat1{i}(:,2)));
+%     matrix2=vertcat(cell2mat(mat2{i}(:,2)));
+%     
+%     if strfind([name1{i},name2{i}],'60')>0
+%         %PCA_2_cc_Original(matrix1, matrix2, 'Class1', 'Class2');
+%         PCA_2_cc_Original(matrix1(:,indexesGeometricCcs),matrix2(:,indexesGeometricCcs),name1{i},name2{i},path2save,indexesGeometricCcs);
+%         
+%         %delete nan due to slow - fast cells
+%         m1=matrix1(indexesM1{i},1:69);
+%         m2=matrix2(indexesM2{i},1:69);
+%         
+%         PCA_2_cc_Original(m1,m2,name1{i},name2{i},path2save);
+%     else
+%         PCA_2_cc_Original(matrix1(:,indexesGeometricCcs),matrix2(:,indexesGeometricCcs),name1{i},name2{i},path2save,indexesGeometricCcs);
+%         PCA_2_cc_Original(matrix1(:,indexesGeometricDapiCcs),matrix2(:,indexesGeometricDapiCcs),name1{i},name2{i},path2save,indexesGeometricDapiCcs);
+%         
+%         %delete nan due to slow - fast cells
+%         m1=matrix1(indexesM1{i},:);
+%         m2=matrix2(indexesM2{i},:);
+%         
+%         PCA_2_cc_Original(m1,m2,name1{i},name2{i},path2save);
+%     end
+% end
 
 mat1={matrixG93A60,matrixG93A80,matrixG93A100,matrixCONT120,matrixWT120};
 mat2={matrixG93A120,matrixG93A120,matrixG93A120,matrixG93A120,matrixG93A120};
@@ -71,7 +71,7 @@ for i=1:length(mat1)
     if strfind([name1{i},name2{i}],'60')>0
         %PCA_2_cc_Original(matrix1, matrix2, matrix3, 'Class1', 'Class2');
        
-        PCA_2_cc_Original_G93A130(matrix1(:,indexesGeometricCcs),matrix2(:,indexesGeometricCcs),matrix3(:,indexesGeometricDapiCcs),name1{i},name2{i},path2save,indexesGeometricCcs);
+        PCA_2_cc_Original_G93A130(matrix1(:,indexesGeometricCcs),matrix2(:,indexesGeometricCcs),matrix3(:,indexesGeometricCcs),name1{i},name2{i},path2save,indexesGeometricCcs);
         
         %delete nan due to slow - fast cells
         m1=matrix1(indexesM1{i},1:69);
@@ -80,7 +80,7 @@ for i=1:length(mat1)
         
         PCA_2_cc_Original_G93A130(m1,m2,m3,name1{i},name2{i},path2save);
     else
-        PCA_2_cc_Original_G93A130(matrix1(:,indexesGeometricCcs),matrix2(:,indexesGeometricCcs),matrix3(:,indexesGeometricDapiCcs),name1{i},name2{i},path2save,indexesGeometricCcs);
+        PCA_2_cc_Original_G93A130(matrix1(:,indexesGeometricCcs),matrix2(:,indexesGeometricCcs),matrix3(:,indexesGeometricCcs),name1{i},name2{i},path2save,indexesGeometricCcs);
         PCA_2_cc_Original_G93A130(matrix1(:,indexesGeometricDapiCcs),matrix2(:,indexesGeometricDapiCcs),matrix3(:,indexesGeometricDapiCcs),name1{i},name2{i},path2save,indexesGeometricDapiCcs);
     
         %delete nan due to slow - fast cells
