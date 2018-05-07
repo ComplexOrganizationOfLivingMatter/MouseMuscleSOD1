@@ -1,5 +1,5 @@
 %%PCA_2_cc
-function PCA_2_cc_Original(m_t1,m_t2,n_t1,n_t2,path2save)
+function PCA_2_cc_Original(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
 
     %Summary of process:
     % 1-Calculate 10 betters trios
@@ -14,8 +14,13 @@ function PCA_2_cc_Original(m_t1,m_t2,n_t1,n_t2,path2save)
 
     %% Parameters Initialization
     %Selection of specified ccs
-    totalCharactsIndexes=1:size(m_t1, 2); %num of columns
-
+    if isempty(varargin)
+        totalCharactsIndexes=1:size(m_t1, 2); %num of columns
+        indexesCcs=totalCharactsIndexes;
+    else
+        indexesCcs=varargin{1};
+        totalCharactsIndexes=1:length(indexesCcs);
+    end
     %Asignation to groups by matrixes
     % Group 1
     matrixT1=m_t1;
@@ -124,6 +129,8 @@ function PCA_2_cc_Original(m_t1,m_t2,n_t1,n_t2,path2save)
     Proy = proyEachStep{numIter};
     Proy = Proy{numRow};
 
+    indexesCcsSelected=indexesCcs(indexesCcsSelected);
+    
 
     save( [path2save 'PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs)], 'BettersPCAEachStep', 'Proy', 'bestPCA','indexesCcsSelected', 'eigenvectors')
 
@@ -164,13 +171,11 @@ function PCA_2_cc_Original(m_t1,m_t2,n_t1,n_t2,path2save)
     legend(n_t1,n_t2, 'Location', 'bestoutside')
     set(gca,'FontSize', 20)
     set(gcf,'color','white')
-    
-    
-    
+
     F = getframe(h);
     
-    imwrite(F.cdata, [path2save 'PCA_' n_t1 '_' n_t2 '.tiff'],'Resolution', 300);
-    savefig(h,[path2save 'PCA_' n_t1 '_' n_t2 '.fig'])
+    imwrite(F.cdata, [path2save 'PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs) '.tiff'],'Resolution', 300);
+    savefig(h,[path2save 'PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs) '.fig'])
     
     pause(10)
     
