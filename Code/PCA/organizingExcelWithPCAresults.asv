@@ -86,12 +86,10 @@ for nPathFiles=1:length(groupOfPathFiles)
         end
 
 
-        if ~isnumeric(eigenvectors)
-            weightCcs=cell2mat(eigenvectors);
-        else
-            weightCcs=eigenvectors;
+        if isnumeric/eigenvectors
+           '' 
         end
-        
+        weightCcs=cell2mat(eigenvectors);
         [absWeightCcsCol,indCol]=max(abs(weightCcs),[],2);
         [absWeightCcs,indRow]=sort(absWeightCcsCol,'descend');
 
