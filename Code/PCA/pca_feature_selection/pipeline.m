@@ -5,8 +5,8 @@ load('..\..\..\PCA_data\Matrix_cc_04-May-2018.mat')
 path2save='..\..\..\PCA_data\PCA_data_by_groups\';
 
 
-indexesGeometricCcs=[1 2 7:16 23:36 41 42 47 48 53 54 33 34];
-indexesGeometricDapiCcs=[1 2 7:16 23:36 41 42 47 48 53 54 59 60 70:81];
+indexesGeometricCcs=[1 2 7:16 23:36 41 42 47 48 53 54 59 60];
+indexesGeometricDapiCcs=[indexesGeometricCcs 70:81];
 
 indCONT60=cellfun(@(x) ~(length(isnan(x))==1),matrixCONT60(:,1));
 indCONT80=cellfun(@(x) ~(length(isnan(x))==1),matrixCONT80(:,1));
@@ -34,24 +34,24 @@ for i=1:length(mat1)
     matrix2=vertcat(cell2mat(mat2{i}(:,2)));
     
     if strfind([name1{i},name2{i}],'60')>0
-%         %PCA_2_cc_Original(matrix1, matrix2, 'Class1', 'Class2');
-%         PCA_2_cc_Original(matrix1(:,indexesGeometricCcs),matrix2(:,indexesGeometricCcs),name1{i},name2{i},path2save,indexesGeometricCcs);
-%         
+        %PCA_2_cc_Original(matrix1, matrix2, 'Class1', 'Class2');
+        PCA_2_cc_Original(matrix1(:,indexesGeometricCcs),matrix2(:,indexesGeometricCcs),name1{i},name2{i},path2save,indexesGeometricCcs);
+        
 %         %delete nan due to slow - fast cells
 %         m1=matrix1(indexesM1{i},1:69);
 %         m2=matrix2(indexesM2{i},1:69);
 %         
 %         PCA_2_cc_Original(m1,m2,name1{i},name2{i},path2save);
     else
-%         PCA_2_cc_Original(matrix1(:,indexesGeometricCcs),matrix2(:,indexesGeometricCcs),name1{i},name2{i},path2save,indexesGeometricCcs);
+        PCA_2_cc_Original(matrix1(:,indexesGeometricCcs),matrix2(:,indexesGeometricCcs),name1{i},name2{i},path2save,indexesGeometricCcs);
 %         PCA_2_cc_Original(matrix1(:,indexesGeometricDapiCcs),matrix2(:,indexesGeometricDapiCcs),name1{i},name2{i},path2save,indexesGeometricDapiCcs);
 %         
 %         %delete nan due to slow - fast cells
-        m1=matrix1(indexesM1{i},:);
-        m2=matrix2(indexesM2{i},:);
-        
+%         m1=matrix1(indexesM1{i},:);
+%         m2=matrix2(indexesM2{i},:);
+%         
 %         PCA_2_cc_Original(m1,m2,name1{i},name2{i},path2save);
-        PCA_2_cc_Original(m1(:,1:69),m2(:,1:69),name1{i},name2{i},path2save,[1:69]);
+%         PCA_2_cc_Original(m1(:,1:69),m2(:,1:69),name1{i},name2{i},path2save,[1:69]);
     end
 end
 
@@ -70,10 +70,10 @@ for i=1:length(mat1)
     matrix3=vertcat(cell2mat(mat3{i}(:,2)));
     
     if strfind([name1{i},name2{i}],'60')>0
-%         %PCA_2_cc_Original(matrix1, matrix2, matrix3, 'Class1', 'Class2');
-%        
-%         PCA_2_cc_Original_G93A130(matrix1(:,indexesGeometricCcs),matrix2(:,indexesGeometricCcs),matrix3(:,indexesGeometricCcs),name1{i},name2{i},path2save,indexesGeometricCcs);
-%         
+        %PCA_2_cc_Original(matrix1, matrix2, matrix3, 'Class1', 'Class2');
+       
+        PCA_2_cc_Original_G93A130(matrix1(:,indexesGeometricCcs),matrix2(:,indexesGeometricCcs),matrix3(:,indexesGeometricCcs),name1{i},name2{i},path2save,indexesGeometricCcs);
+        
 %         %delete nan due to slow - fast cells
 %         m1=matrix1(indexesM1{i},1:69);
 %         m2=matrix2(indexesM2{i},1:69);
@@ -81,16 +81,16 @@ for i=1:length(mat1)
 %         
 %         PCA_2_cc_Original_G93A130(m1,m2,m3,name1{i},name2{i},path2save);
     else
-%         PCA_2_cc_Original_G93A130(matrix1(:,indexesGeometricCcs),matrix2(:,indexesGeometricCcs),matrix3(:,indexesGeometricCcs),name1{i},name2{i},path2save,indexesGeometricCcs);
+        PCA_2_cc_Original_G93A130(matrix1(:,indexesGeometricCcs),matrix2(:,indexesGeometricCcs),matrix3(:,indexesGeometricCcs),name1{i},name2{i},path2save,indexesGeometricCcs);
 %         PCA_2_cc_Original_G93A130(matrix1(:,indexesGeometricDapiCcs),matrix2(:,indexesGeometricDapiCcs),matrix3(:,indexesGeometricDapiCcs),name1{i},name2{i},path2save,indexesGeometricDapiCcs);
 %     
 %         %delete nan due to slow - fast cells
-        m1=matrix1(indexesM1{i},:);
-        m2=matrix2(indexesM2{i},:);
-        m3=matrix3(indexesM3{i},:);
-        
+%         m1=matrix1(indexesM1{i},:);
+%         m2=matrix2(indexesM2{i},:);
+%         m3=matrix3(indexesM3{i},:);
+%         
 %         PCA_2_cc_Original_G93A130(m1,m2,m3,name1{i},name2{i},path2save);
-        PCA_2_cc_Original_G93A130(m1(:,1:69),m2(:,1:69),m3(:,1:69),name1{i},name2{i},path2save,1:69);
+%         PCA_2_cc_Original_G93A130(m1(:,1:69),m2(:,1:69),m3(:,1:69),name1{i},name2{i},path2save,1:69);
 
         
     end
