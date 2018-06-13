@@ -94,7 +94,7 @@ function PCA_2_cc_Original(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
 
     %Max of 4 expansions.
     while expansionIndex <= maxExpansion
-        expansionIndex
+        %expansionIndex
         BetterPCAs_bef=BetterPCAs;
         clear Proy
         [BetterPCAs,Proy, eigenvectors]=add_cc_original(BetterPCAs_bef,matrixAllCCs,expansion(expansionIndex),nImgType1,nImgType2);
@@ -173,9 +173,11 @@ function PCA_2_cc_Original(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
     set(gcf,'color','white')
 
     F = getframe(h);
-    
     imwrite(F.cdata, [path2save 'PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs) '.tiff'],'Resolution', 300);
     savefig(h,[path2save 'PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs) '.fig'])
+    
+    disp(['PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs)])
+
     
     pause(10)
     

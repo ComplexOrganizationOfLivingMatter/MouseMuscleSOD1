@@ -7,9 +7,9 @@ listOfCcs=table2cell(tableCcs);
 load([rootPath 'Matrix_cc_04-May-2018.mat'])
 
 group1='34ccs';
-group2='46-34(60 days)ccs';
+group2='46ccs';
 group3='69ccs';
-group4='81-69(60 days)ccs';
+group4='81ccs';
 pathFilesPca1=dir([pathPCAresults group1 '\*.mat']);
 pathFilesPca2=dir([pathPCAresults group2 '\*.mat']);
 pathFilesPca3=dir([pathPCAresults group3 '\*.mat']);

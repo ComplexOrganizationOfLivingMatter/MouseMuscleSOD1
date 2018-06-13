@@ -1,5 +1,5 @@
 %%PCA_2_cc
-function PCA_2_cc_Original_G93A130(m_t1,m_t2,m_t3,n_t1,n_t2,path2save,varargin)
+function PCA_2_cc_Original_Subgroups(m_t1,m_t2,m_t3,n_t1,n_t2,path2save,varargin)
 
     %Summary of process:
     % 1-Calculate 10 betters trios
@@ -99,7 +99,7 @@ function PCA_2_cc_Original_G93A130(m_t1,m_t2,m_t3,n_t1,n_t2,path2save,varargin)
 
     %Max of 4 expansions.
     while expansionIndex <= maxExpansion
-        expansionIndex
+%         expansionIndex
         BetterPCAs_bef=BetterPCAs;
         clear Proy
         [BetterPCAs,Proy, eigenvectors]=add_cc_original(BetterPCAs_bef,matrixAllCCs,expansion(expansionIndex),nImgType1,nImgType2+nImgType3);
@@ -140,12 +140,13 @@ function PCA_2_cc_Original_G93A130(m_t1,m_t2,m_t3,n_t1,n_t2,path2save,varargin)
 
     switch lower(n_t1(1:2))
         
-        case 'wt'
+        case {'wt'}
             color1=[0,1,0];
         case 'co'
             color1=[0,0,1];
         case 'g9'
             color1=[1,0,0];
+            
     end
     
     switch lower(n_t2(1:2))
@@ -154,12 +155,16 @@ function PCA_2_cc_Original_G93A130(m_t1,m_t2,m_t3,n_t1,n_t2,path2save,varargin)
             color2=[0,1,0];
         case 'co'
             color2=[0,0,1];
+            color3=[0,1,0];
         case 'g9'
             color2=[1,0,0];
             color3=[160,0,0]/255;
+        case 'tr'
+            color2=[1,0,0];
+            color3=[0,1,0];
     end
     
-    if strcmp(lower(n_t1(1:2)),lower(n_t2(1:2)))==1
+    if strcmpi(n_t1(1:2),n_t2(1:2))==1
         color2=color1/2;
         color3=color2/2;
     end
@@ -184,6 +189,7 @@ function PCA_2_cc_Original_G93A130(m_t1,m_t2,m_t3,n_t1,n_t2,path2save,varargin)
     imwrite(F.cdata, [path2save 'PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs) '.tiff'],'Resolution', 300);
     savefig(h,[path2save 'PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs) '.fig'])
     
+    disp(['PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs)])
     pause(10)
     
     clear F
