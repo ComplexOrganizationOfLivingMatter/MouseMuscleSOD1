@@ -59,28 +59,27 @@ for nPathFiles=1:length(groupOfPathFiles)
                 case 'G93A 120'
                     matrixCcs=matrixG93A120;
                     matrixAux=matrixG93A130;
+                case 'Transgenic 100'
+                    matrixCcs=matrixG93A100;
+                    matrixAux=matrixWT100;
+                case 'Transgenic 120'
+                    matrixCcs=matrixG93A120;
+                    matrixAux=matrixWT120;
+                case 'ControlWT 100'
+                    matrixCcs=matrixCONT100;
+                    matrixAux=matrixWT100;
+                case 'ControlWT 120'
+                    matrixCcs=matrixCONT120;
+                    matrixAux=matrixWT120;
             end
 
             switch nGroup
                 case 1
-                    switch nPathFiles
-                        case {1, 2}
-                            matrixGroup1=cell2mat(matrixCcs(:,2));
-                        case {3, 4}
-                            matrixGroup1=cell2mat(matrixCcs(cellfun(@(x) ~(length(isnan(x))==1),matrixCcs(:,1)),2));
-                    end
+                    matrixGroup1=cell2mat(matrixCcs(cellfun(@(x) ~(length(isnan(x))==1),matrixCcs(:,1)),2));
                 case 2
-                    switch nPathFiles
-                        case {1, 2}
-                            matrixGroup2=cell2mat(matrixCcs(:,2));
-                            if strcmp(nameClass,'G93A 120')
-                                matrixGroup2=[matrixGroup2;cell2mat(matrixAux(:,2))];
-                            end
-                        case {3, 4}
-                            matrixGroup2=cell2mat(matrixCcs(cellfun(@(x) ~(length(isnan(x))==1),matrixCcs(:,1)),2));
-                            if strcmp(nameClass,'G93A 120')
-                                matrixGroup2=[matrixGroup2;cell2mat(matrixAux(cellfun(@(x) ~(length(isnan(x))==1),matrixAux(:,1)),2))];
-                            end
+                    matrixGroup2=cell2mat(matrixCcs(cellfun(@(x) ~(length(isnan(x))==1),matrixCcs(:,1)),2));
+                    if strcmp(nameClass,'G93A 120') || strcmp(nameClass,'Transgenic 120') || strcmp(nameClass,'Transgenic 100') || strcmp(nameClass,'ControlWT 100') || strcmp(nameClass,'ControlWT 120') 
+                        matrixGroup2=[matrixGroup2;cell2mat(matrixAux(cellfun(@(x) ~(length(isnan(x))==1),matrixAux(:,1)),2))];
                     end
             end
         end
@@ -128,5 +127,5 @@ for nPathFiles=1:length(groupOfPathFiles)
 
     end
     t = cell2table(excelStructure); 
-    writetable(t,[rootPath 'featuresSelectedPCA_' groupNames{nPathFiles} '_' date '.xls'], 'writevariablenames', false);
+    writetable(t,[rootPath 'featuresSelectedPCA_' groupNames{nPathFiles} '_' date '(1).xls'], 'writevariablenames', false);
 end

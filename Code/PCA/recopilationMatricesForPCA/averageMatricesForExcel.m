@@ -37,8 +37,8 @@ for i = 1:length(matricesList)
     
     meanCCsFilter=mean(filterNanMatrix);
     stdCCsFilter=std(filterNanMatrix);
-    meanCCs=mean(m);
-    stdCCs=std(m);
+    meanCCs=mean(filterNanMatrix);
+    stdCCs=std(filterNanMatrix);
     
     auxMatrix(:,1)=meanCCsFilter';
     auxMatrix(:,2)=stdCCsFilter';
