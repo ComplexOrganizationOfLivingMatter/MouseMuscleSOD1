@@ -1,7 +1,7 @@
 %Comparing features 
 
 folder_data='..\..\PCA_data\';
-filename = 'Matrix_cc_04-May-2018.mat';
+filename = 'Matrix_cc_06-Oct-2020.mat';
 
 load([folder_data filename])
 
@@ -10,6 +10,8 @@ indCONT60=cellfun(@(x) ~(length(isnan(x))==1),matrixCONT60(:,1));
 indCONT80=cellfun(@(x) ~(length(isnan(x))==1),matrixCONT80(:,1));
 indCONT100=cellfun(@(x) ~(length(isnan(x))==1),matrixCONT100(:,1));
 indCONT120=cellfun(@(x) ~(length(isnan(x))==1),matrixCONT120(:,1));
+indWT120=cellfun(@(x) ~(length(isnan(x))==1),matrixWT120(:,1));
+
 indG93A60=cellfun(@(x) ~(length(isnan(x))==1),matrixG93A60(:,1));
 indG93A80=cellfun(@(x) ~(length(isnan(x))==1),matrixG93A80(:,1));
 indG93A100=cellfun(@(x) ~(length(isnan(x))==1),matrixG93A100(:,1));
@@ -24,6 +26,7 @@ g93a60 = vertcat(matrixG93A60{indG93A60,2});
 g93a80 = vertcat(matrixG93A80{indG93A80,2});
 g93a100 = vertcat(matrixG93A100{indG93A100,2});
 g93a120 = [vertcat(matrixG93A120{indG93A120,2});vertcat(matrixG93A130{indG93A130,2})];
+wt120 = vertcat(matrixWT120{indWT120,2});
 
 
 
