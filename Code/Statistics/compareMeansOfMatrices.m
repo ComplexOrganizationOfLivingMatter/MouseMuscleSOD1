@@ -3,10 +3,10 @@ function tableStats = compareMeansOfMatrices(m1,m2)
 
 %First, we evaluated whether features values of 2 kind of data presented normal 
 %distribution and variance using Kolmogorov–Smirnov and F?Snedecor tests, respectively. 
-%In case that data presented the same distribution but not an equal variance,
+%In case that data presented normal distribution but not an equal variance,
 %we employed a two?tailed Welch test to compare the means from both groups. 
-%In case that data presented different distribution and a different variance, 
-%we employed Wilcoxon test to compare the means from both groups. 
+%In case that data presented not normal distribution, 
+%we employed Wilcoxon test to compare the medians from both groups. 
 %We employed a two?tailed Student's t ?test to compare the means in the cases
 %where both distribution and variance of the two sets of data were similar
 tableStats=table('Size',[size(m1,2),2],'VariableTypes',{'string','double'},'VariableNames',{'algorithm','p'});
@@ -16,10 +16,23 @@ tableStats=table('Size',[size(m1,2),2],'VariableTypes',{'string','double'},'Vari
         feature1=m1(:,i);
         feature2=m2(:,i);
         %initialize stats
-        hKS1 = kstest(feature1);
-        hKS2 = kstest(feature2);
+        %kolmogorov smirnov test if n>50 -> 
+        %h=0 -> normal distribution; h=1 -> reject the null hypothesis at p-value ->0.05*
+        %else: shapiro-wilk test
+        if length(feature1)<50
+            hKS1 = swtest(feature1);
+        else
+            hKS1 = kstest(feature1);
+        end
+        if length(feature2)<50
+            hKS2 = swtest(feature2);
+        else
+            hKS2 = kstest(feature2);
+        end
+       
         
-        if hKS1 == 1 && hKS2 ==1
+        
+        if hKS1 == 0 && hKS2 ==0
         
             %   H = VARTEST2(X,Y) performs an F test of the hypothesis that two
             %   independent samples, in the vectors X and Y, come from normal
@@ -31,7 +44,7 @@ tableStats=table('Size',[size(m1,2),2],'VariableTypes',{'string','double'},'Vari
             %   different lengths.
             hVar = vartest2(feature1,feature2);
             
-            if hVar==1
+            if hVar==0
                 %t-test. Normal distribution and same variances
                 [h_ttest, p_ttest]=ttest2(feature1,feature2);
                 nameAlgo = 't-test';
