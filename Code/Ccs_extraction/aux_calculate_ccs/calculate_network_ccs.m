@@ -279,7 +279,7 @@ function [Mean_neighbors,Std_neighbors,Std_neighbors_of_slow,Std_neighbors_of_fa
         Desv_dist_fast_fast=0;
     end
 
-    %CC63-64
+    %CC65-66
     if ~isempty(intersect(slow_cells,valid_cells)) 
         M3=triu(Matrix_shortest_distances_all_nodes(intersect(slow_cells,valid_cells),intersect(slow_cells,valid_cells)));
         Mean_dist_slow_slow=mean(M3(M3~=0));
@@ -289,7 +289,7 @@ function [Mean_neighbors,Std_neighbors,Std_neighbors_of_slow,Std_neighbors_of_fa
         Desv_dist_slow_slow=0;
     end
 
-    %CC65-CC68
+    %CC63-CC64 && CC67-CC68
     if ~isempty(intersect(slow_cells,valid_cells)) && ~isempty(intersect(fast_cells,valid_cells)) 
         M2=Matrix_shortest_distances_all_nodes(intersect(fast_cells,valid_cells),intersect(slow_cells,valid_cells));
         Mean_dist_fast_slow=mean(M2(M2~=0));
