@@ -1,5 +1,5 @@
 
-load('..\..\..\PCA_data\Matrix_cc_04-May-2018.mat')
+load('..\..\..\PCA_data\Matrix_cc_13-Nov-2020.mat')
 
 indCONT60=cellfun(@(x) ~(length(isnan(x))==1),matrixCONT60(:,1));
 indCONT80=cellfun(@(x) ~(length(isnan(x))==1),matrixCONT80(:,1));
