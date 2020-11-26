@@ -1,15 +1,18 @@
 rootPath='..\..\PCA_data\';
 
-pathPCAresults=[rootPath 'PCA_data_by_groups\'];
-tableCcs=readtable('..\..\docs\list_81_cc.xls');
+pathPCAresults=[rootPath 'PCA_data_by_groups\13-Nov-2020\'];
+tableCcs=readtable('..\..\docs\list_67_ccs.xls');
 listOfCcs=table2cell(tableCcs);
 
-load([rootPath 'Matrix_cc_06-Oct-2020.mat'])
+load([rootPath 'Matrix_cc_13-Nov-2020.mat'])
 
-group1='34ccs';
-group2='46ccs';
-group3='69ccs';
-group4='81ccs';
+group1='15 ccs';
+group2='34 ccs';
+group3='39 ccs';
+group4='67 ccs';
+% group2='46ccs';
+% group3='69ccs';
+% group4='81ccs';
 pathFilesPca1=dir([pathPCAresults group1 '\*.mat']);
 pathFilesPca2=dir([pathPCAresults group2 '\*.mat']);
 pathFilesPca3=dir([pathPCAresults group3 '\*.mat']);
