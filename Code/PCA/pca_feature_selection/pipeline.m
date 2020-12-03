@@ -35,7 +35,7 @@ name2={'Control 80','Control 100','Control 120','Control 100','Control 120','Con
 indexesM1={indCONT60,indCONT60,indCONT60,indCONT80,indCONT80,indCONT100,indG93A60,indG93A60,indG93A80,indWT80,indWT80,indWT100,indCONT60,indCONT80,indWT80,indWT80,indCONT100,indWT100,indWT100,indWT120};
 indexesM2={indCONT80,indCONT100,indCONT120,indCONT100,indCONT120,indCONT120,indG93A80,indG93A100,indG93A100,indWT100,indWT120,indWT120,indG93A60,indG93A80,indCONT80,indG93A80,indG93A100,indCONT100,indG93A100,indCONT120};
 
-parfor i=1:length(mat1)
+for i=1:length(mat1)
     matrix1=vertcat(cell2mat(mat1{i}(:,2)));
     matrix2=vertcat(cell2mat(mat2{i}(:,2)));
     m1=matrix1(indexesM1{i},:);
@@ -66,7 +66,7 @@ indexesM3={indG93A130,indG93A130,indG93A130,indG93A130,indG93A130};
 name1={'G93A 60','G93A 80','G93A 100','Control 120','WT 120'};
 % name2={'G93A 120','G93A 120','G93A 120','G93A 120','G93A 120'};
 
-parfor i=1:length(mat1)
+for i=1:length(mat1)
     matrix1=vertcat(cell2mat(mat1{i}(:,2)));
     matrix2=vertcat(cell2mat(mat2{i}(:,2)));
     matrix3=vertcat(cell2mat(mat3{i}(:,2)));
