@@ -45,7 +45,7 @@ function UMAP_NDICIA(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
 
     %% Calculate all trios of characteristics
     nIteration=1;
-    W={};eigenvectors={};Ratio_UMAP=[];
+    Proyections={};eigenvectors={};Ratio_UMAP=[];
     for cc1=1:n_totalCcs-2
         for cc2=cc1+1:n_totalCcs-1
             for cc3=cc2+1:n_totalCcs
@@ -63,7 +63,7 @@ function UMAP_NDICIA(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
 
                 %Calculate proyections, eigenvectors and ratios of UMAP
                 %accumulative
-                [W,eigenvectors,Ratio_UMAP]=calculateUMAPValues(matrixChosenCcs,nIteration,nImgType1,nImgType2,W,eigenvectors,Ratio_UMAP,[cc1,cc2,cc3]);
+                [Proyections,eigenvectors,Ratio_UMAP]=calculateUMAPValues(matrixChosenCcs,nIteration,nImgType1,nImgType2,Proyections,eigenvectors,Ratio_UMAP,[cc1,cc2,cc3]);
 
                 %counter + 1
                 nIteration=nIteration+1;
@@ -80,7 +80,7 @@ function UMAP_NDICIA(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
     BetterUMAPs(1:nOfBest,1:4)=[Ratio_UMAP(1,indexBetter);Ratio_UMAP(2,indexBetter);Ratio_UMAP(3,indexBetter);Ratio_UMAP(4,indexBetter)]';
     best_eigenvectors = eigenvectors(indexBetter);
     eigenvectors = best_eigenvectors;
-    Proy=W(1,indexBetter);
+    Proy=Proyections(1,indexBetter);
 
 
     %% Expansion

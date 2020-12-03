@@ -5,7 +5,7 @@ BetterPCAs=[];
 for rowCCs=1:size(BetterPCAs_bef,1)
     W={};eigenvectors={};Ratio_UMAP=[];
     ccsRow=BetterPCAs_bef(rowCCs,2:size(BetterPCAs_bef,2));
-    
+    ccsRow(ccsRow<=0)=[];
     for nCC=1:size(matrixAllCCs,2)
         
         matrixChosenCcs=[];
