@@ -20,6 +20,8 @@ function UMAP_NDICIA(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
     else
         indexesCcs=varargin{1};
         totalCharactsIndexes=1:length(indexesCcs);
+        nRand = varargin{2};
+
     end
     %Asignation to groups by matrixes
     % Group 1
@@ -174,8 +176,8 @@ function UMAP_NDICIA(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
     set(gcf,'color','white')
 
     F = getframe(h);
-    imwrite(F.cdata, [path2save 'UMAP_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs) '.tiff'],'Resolution', 300);
-    savefig(h,[path2save 'UMAP_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs) '.fig'])
+    imwrite(F.cdata, [path2save 'UMAP_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs) '_' num2str(nRand) '.tiff'],'Resolution', 300);
+    savefig(h,[path2save 'UMAP_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs) '_' num2str(nRand) '.fig'])
     
     disp(['UMAP_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs)])
 
