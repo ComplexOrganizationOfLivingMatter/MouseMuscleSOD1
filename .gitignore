@@ -43,6 +43,8 @@ $RECYCLE.BIN/
 /docs/
 /ALS-SOD1 bibliography/
 /PCA_data/
+/UMAP_data/
+/TSNE_data/
 /Photos/
 /Processed_images/
 /Paper/

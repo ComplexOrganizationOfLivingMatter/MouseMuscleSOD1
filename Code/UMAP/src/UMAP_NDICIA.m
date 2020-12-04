@@ -124,6 +124,7 @@ function UMAP_NDICIA(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
     bestIterationUMAP = BettersUMAPEachStep{numIter};
     [bestUMAP, numRow] = max(bestIterationUMAP(:, 1));
     indexesCcsSelected=bestIterationUMAP(numRow, 2:size(bestIterationUMAP,2));
+    indexesCcsSelected(indexesCcsSelected==0)=[];
     eigenvectors = eigenvectorsEachStep{numIter};
     eigenvectors = eigenvectors{numRow};
     Proy = proyEachStep{numIter};
@@ -160,7 +161,7 @@ function UMAP_NDICIA(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
     end
     
     %%Represent Luisma format
-    Proyecc=Proy;
+    Proyecc=Proy';
     h=figure('Position', get(0, 'Screensize')); 
     plot(Proyecc(1,1:nImgType1),Proyecc(2,1:nImgType1),'.','Color',color1,'MarkerSize',45)
     hold on, plot(Proyecc(1,nImgType1+1:nImgType1+nImgType2),Proyecc(2,nImgType1+1:nImgType1+nImgType2),'.','Color',color2,'MarkerSize',45)

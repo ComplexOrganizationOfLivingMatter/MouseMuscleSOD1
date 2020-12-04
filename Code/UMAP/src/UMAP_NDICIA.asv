@@ -124,6 +124,7 @@ function UMAP_NDICIA(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
     bestIterationUMAP = BettersUMAPEachStep{numIter};
     [bestUMAP, numRow] = max(bestIterationUMAP(:, 1));
     indexesCcsSelected=bestIterationUMAP(numRow, 2:size(bestIterationUMAP,2));
+    indexesCcsSelected(indexesCcsSelected==0)=[];
     eigenvectors = eigenvectorsEachStep{numIter};
     eigenvectors = eigenvectors{numRow};
     Proy = proyEachStep{numIter};
