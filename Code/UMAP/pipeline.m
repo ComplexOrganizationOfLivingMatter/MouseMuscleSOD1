@@ -5,6 +5,7 @@ close all
 addpath(genpath('src'))
 load('..\..\PCA_data\Matrix_cc_13-Nov-2020.mat')
 path2save='..\..\UMAP_data\UMAP_data_by_groups\';
+warning('off','all')
 if ~exist(path2save,'dir')
     mkdir(path2save)
 end
@@ -48,13 +49,13 @@ for i=1:length(mat1)
     m1=matrix1(indexesM1{i},:);
     m2=matrix2(indexesM2{i},:);
     
-    for nRand = 1 : nRandomizations
+    parfor nRand = 3:nRandomizations
         %UMAP_NDICIA(matrix1, matrix2, 'Class1', 'Class2','indexesTag');
-        UMAP_NDICIA(m1(:,indexAllFeaturesNoDapi),m2(:,indexAllFeaturesNoDapi),name1{i},name2{i},path2save,indexAllFeaturesNoDapi,nRand);
         UMAP_NDICIA(m1(:,indexesOnlyGeometricNoTypeFibre),m2(:,indexesOnlyGeometricNoTypeFibre),name1{i},name2{i},path2save,indexesOnlyGeometricNoTypeFibre,nRand);
-        UMAP_NDICIA(m1(:,indexesGeometricNetworkCcs),m2(:,indexesGeometricNetworkCcs),name1{i},name2{i},path2save,indexesGeometricNetworkCcs,nRand);
         UMAP_NDICIA(m1(:,indexesOnlyGeometricCcs),m2(:,indexesOnlyGeometricCcs),name1{i},name2{i},path2save,indexesOnlyGeometricCcs,nRand);
+        UMAP_NDICIA(m1(:,indexesGeometricNetworkCcs),m2(:,indexesGeometricNetworkCcs),name1{i},name2{i},path2save,indexesGeometricNetworkCcs,nRand);
         UMAP_NDICIA(m1(:,indexes34andAreas),m2(:,indexes34andAreas),name1{i},name2{i},path2save,indexes34andAreas,nRand);
+        UMAP_NDICIA(m1(:,indexAllFeaturesNoDapi),m2(:,indexAllFeaturesNoDapi),name1{i},name2{i},path2save,indexAllFeaturesNoDapi,nRand);
 
 %         %include dapi ccs if > 60 days
 %         if ~contains([name1{i},name2{i}],'60')
@@ -88,12 +89,12 @@ for i=1:length(mat1)
     
     for nRand = 1 : nRandomizations
         %UMAP_NDICIA(matrix1, matrix2, matrix3, 'Class1', 'Class2','indexesTag');
-        UMAP_NDICIA(m1(:,indexAllFeaturesNoDapi),[m2(:,indexAllFeaturesNoDapi),m3(:,indexAllFeaturesNoDapi)],name1{i},'G93A 120',path2save,indexAllFeaturesNoDapi,nRand);
+        UMAP_NDICIA(m1(:,indexesOnlyGeometricNoTypeFibre),[m2(:,indexesOnlyGeometricNoTypeFibre),m3(:,indexesOnlyGeometricNoTypeFibre)],name1{i},'G93A 120',path2save,indexesOnlyGeometricNoTypeFibre,nRand);
         UMAP_NDICIA(m1(:,indexesOnlyGeometricCcs),[m2(:,indexesOnlyGeometricCcs),m3(:,indexesOnlyGeometricCcs)],name1{i},'G93A 120',path2save,indexesOnlyGeometricCcs,nRand);
         UMAP_NDICIA(m1(:,indexesGeometricNetworkCcs),[m2(:,indexesGeometricNetworkCcs),m3(:,indexesGeometricNetworkCcs)],name1{i},'G93A 120',path2save,indexesGeometricNetworkCcs,nRand);
-        UMAP_NDICIA(m1(:,indexesOnlyGeometricNoTypeFibre),[m2(:,indexesOnlyGeometricNoTypeFibre),m3(:,indexesOnlyGeometricNoTypeFibre)],name1{i},'G93A 120',path2save,indexesOnlyGeometricNoTypeFibre,nRand);
         UMAP_NDICIA(m1(:,indexes34andAreas),[m2(:,indexes34andAreas),m3(:,indexes34andAreas)],name1{i},'G93A 120',path2save,indexes34andAreas,nRand);
-
+        UMAP_NDICIA(m1(:,indexAllFeaturesNoDapi),[m2(:,indexAllFeaturesNoDapi),m3(:,indexAllFeaturesNoDapi)],name1{i},'G93A 120',path2save,indexAllFeaturesNoDapi,nRand);
+        
 %         %include dapi ccs if > 60 days
 %         if ~contains([name1{i},'G93A 120'],'60')
 %             UMAP_NDICIA(m1(:,indexAllFeatures),[m2(:,indexAllFeatures),m3(:,indexAllFeatures)],name1{i},'G93A 120',path2save,indexAllFeatures);

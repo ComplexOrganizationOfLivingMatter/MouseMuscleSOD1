@@ -5,8 +5,7 @@ function UMAP_NDICIA(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
     % 2-Compare each individual cc VS each of 10 trios. Getting 5 betters descriptors by trio, with a total of 50 quartets of cc (5x10)
     % 3-Repeat process before saving 2 best cc for quartets (5x10x2). Total of 100 quintets
     % Finally, adding a 'cc' until 7 ccs or until get lower descriptor of
-    % UMAP
-    % than step before.
+    % UMAP than step before.
 
     %Define expansion in process
     expansion=[5 2 1 1];
@@ -48,6 +47,7 @@ function UMAP_NDICIA(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
     %% Calculate all trios of characteristics
     nIteration=1;
     Proyections={};eigenvectors={};Ratio_UMAP=[];
+    
     for cc1=1:n_totalCcs-2
         for cc2=cc1+1:n_totalCcs-1
             for cc3=cc2+1:n_totalCcs
@@ -65,14 +65,14 @@ function UMAP_NDICIA(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
 
                 %Calculate proyections, eigenvectors and ratios of UMAP
                 %accumulative
+                
                 [Proyections,eigenvectors,Ratio_UMAP]=calculateUMAPValues(matrixChosenCcs,nIteration,nImgType1,nImgType2,Proyections,eigenvectors,Ratio_UMAP,[cc1,cc2,cc3]);
-
                 %counter + 1
                 nIteration=nIteration+1;
-
             end
         end
     end
+    
 
     %% Filtering best 10 UMAP and their 3 ccs
     auxiliar=Ratio_UMAP(1,:)';
@@ -135,7 +135,7 @@ function UMAP_NDICIA(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
     indexesCcsSelected=indexesCcs(indexesCcsSelected);
     
 
-    save( [path2save 'UMAP_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs)], 'BettersUMAPEachStep', 'Proy', 'bestUMAP','indexesCcsSelected', 'eigenvectors')
+    save( [path2save 'UMAP_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs) '_' num2str(nRand)], 'BettersUMAPEachStep', 'Proy', 'bestUMAP','indexesCcsSelected', 'eigenvectors')
 
     
     switch lower(n_t1(1:2))

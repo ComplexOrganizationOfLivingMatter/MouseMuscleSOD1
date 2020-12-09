@@ -824,7 +824,7 @@ method=umap.setMethod(args.method);
 umap.verbose=~beQuiet;
 umap.randomize=args.randomize;
 %umap.negative_sample_rate=30;
-tick=tic;
+% tick=tic;
 
 labelMap=[];
 nParams=length(parameter_names);
@@ -1136,9 +1136,9 @@ if ~isempty(reduction)
             pu.pb.setString('All done');
         end
         updatePlot(reduction, true)
-        annotation(fig, 'textbox', 'String', ['Compute time=\color{blue}' ...
-            String.MinutesSeconds(toc(tick))],'units', 'normalized', ...
-            'position', [.65 .01 .33 .05], 'fontSize', 9)
+%         annotation(fig, 'textbox', 'String', ['Compute time=\color{blue}' ...
+%             String.MinutesSeconds(toc(tick))],'units', 'normalized', ...
+%             'position', [.65 .01 .33 .05], 'fontSize', 9)
         if isempty(template_file) && args.ask_to_save_template
             if isequal('Yes', questdlg({'Save this UMAP reduction', ...
                     'as template to accelerate reduction', ...
@@ -1160,10 +1160,10 @@ if ~isempty(reduction)
         end
     end
     testBasicReduction;
-    if ~beQuiet
-        fprintf('UMAP reduction finished (cost %s)\n', ...
-            String.MinutesSeconds(toc(tick)));
-    end
+%     if ~beQuiet
+%         fprintf('UMAP reduction finished (cost %s)\n', ...
+%             String.MinutesSeconds(toc(tick)));
+%     end
     reportProgress(['Finished ' strReduction]);
     if beGraphic
         if exist('pu', 'var') && isa(pu, 'PopUp')
