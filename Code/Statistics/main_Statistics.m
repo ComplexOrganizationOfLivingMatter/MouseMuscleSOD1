@@ -1,7 +1,8 @@
 %Comparing features 
 
+clear all;
 folder_data='..\..\PCA_data\';
-filename = 'Matrix_cc_06-Oct-2020.mat';
+filename = 'Matrix_cc_13-Nov-2020.mat';
 
 load([folder_data filename])
 

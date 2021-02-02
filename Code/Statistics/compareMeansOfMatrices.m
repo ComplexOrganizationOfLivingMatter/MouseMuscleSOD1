@@ -64,9 +64,9 @@ tableStats=table('Size',[size(m1,2),2],'VariableTypes',{'string','double'},'Vari
             %with equal medians, against the alternative that they are not.
             
             %The Wilcoxon rank sum test is equivalent to the Mann-Whitney U test.
-            [p_Wilconxon,h_Wilconxon] = ranksum(feature1,feature2);
-            nameAlgo = 'Wilconxon';
-            p_ouput = p_Wilconxon;
+            [p_Wilcoxon,h_Wilcoxon] = ranksum(feature1,feature2);
+            nameAlgo = 'Wilcoxon';
+            p_ouput = p_Wilcoxon;
         end
         
         %output: name algorithm - p_value
