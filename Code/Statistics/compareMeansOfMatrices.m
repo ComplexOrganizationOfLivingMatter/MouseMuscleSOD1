@@ -19,15 +19,19 @@ tableStats=table('Size',[size(m1,2),2],'VariableTypes',{'string','double'},'Vari
         %kolmogorov smirnov test if n>50 -> 
         %h=0 -> normal distribution; h=1 -> reject the null hypothesis at p-value ->0.05*
         %else: shapiro-wilk test
+
+        modFeat2 = (feature2-mean(feature2))/std(feature2);
         if length(feature1)<50
             hKS1 = swtest(feature1);
         else
-            hKS1 = kstest(feature1);
+            modFeat1 = (feature1-mean(feature1))/std(feature1);
+            hKS1 = kstest(modFeat1);
         end
         if length(feature2)<50
             hKS2 = swtest(feature2);
         else
-            hKS2 = kstest(feature2);
+            modFeat2 = (feature2-mean(feature2))/std(feature2);
+            hKS2 = kstest(modFeat2);
         end
        
         
