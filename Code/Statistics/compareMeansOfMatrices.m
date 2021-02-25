@@ -20,18 +20,19 @@ tableStats=table('Size',[size(m1,2),2],'VariableTypes',{'string','double'},'Vari
         %h=0 -> normal distribution; h=1 -> reject the null hypothesis at p-value ->0.05*
         %else: shapiro-wilk test
 
-        modFeat2 = (feature2-mean(feature2))/std(feature2);
         if length(feature1)<50
-            hKS1 = swtest(feature1);
+            [hKS1,pks1] = swtest(feature1);
         else
-            modFeat1 = (feature1-mean(feature1))/std(feature1);
-            hKS1 = kstest(modFeat1);
+%             modFeat1 = (feature1-mean(feature1))/std(feature1);
+%             [hKS1,pks1] = kstest(modFeat1);
+            [hKS1,pks1] = lillietest(feature1);
         end
         if length(feature2)<50
-            hKS2 = swtest(feature2);
+            [hKS2,pks2] = swtest(feature2);
         else
-            modFeat2 = (feature2-mean(feature2))/std(feature2);
-            hKS2 = kstest(modFeat2);
+%             modFeat2 = (feature2-mean(feature2))/std(feature2);
+%             [hKS2,pks2] = kstest(modFeat2);
+            [hKS2,pks2] = lillietest(feature2);
         end
        
         
