@@ -1,4 +1,4 @@
-function Segmentation(folder,name)
+function Segmentation(path_img)
 
 %%% Variables
 Noise_background=3000; % Delete noise
@@ -10,40 +10,38 @@ Delete_artifacts=12000; % It's depends of min size cell
 %% SEGMENTATION
 
 %%Load images
-    
-    path_img=(['..\..\Photos\' folder '\' name]);
-    
-    %Reading different images
-    Img_r=imread([path_img '\' name 'r.jpg']);     
-    
-    %If channel G is not necessary to be edited, we work with green
-    %original channel
-    Img_g_original=imread([path_img '\' name 'g.jpg']); 
-    if exist([path_img '\' name 'g_edited.jpg'])==2
-        Img_g=imread([path_img '\' name 'g_edited.jpg']);
-    else
-        Img_g=Img_g_original;
-    end
-    
-    %Any photos don't have DAPI
-    if exist([path_img '\' name 'b.jpg'])==2
-       Img_b=imread([path_img '\' name 'b.jpg']); 
-    else
-       Img_b=0;
-    end
-    
-    %Composite and separate channels
-    Img=Img_r+Img_g+Img_b;
-    Img2=Img_r+Img_g_original+Img_b;
-    R=Img(:,:,1);
-    G=rgb2gray(Img_g);%Img(:,:,2);
-    B=Img(:,:,3);
-    [H,W,c]=size(Img);
+splittedPath = strsplit(path_img,filesep);
+nameImage = splittedPath{end};
+%Reading different images
+Img_r=imread(fullfile(path_img, [nameImage 'r.jpg']));     
+
+%If channel G is not necessary to be edited, we work with green
+%original channel
+Img_g_original=imread(fullfile(path_img, [nameImage 'g.jpg'])); 
+if exist(fullfile(path_img, [nameImage 'g_edited.jpg']),'file')==2
+    Img_g=imread(fullfile(path_img, [nameImage 'g_edited.jpg']));
+else
+    Img_g=Img_g_original;
+end
+
+%Any photos don't have DAPI
+if exist([path_img '\' name 'b.jpg'])==2
+   Img_b=imread(fullfile(path_img, [nameImage 'b.jpg'])); 
+else
+   Img_b=0;
+end
+
+%Composite and separate channels
+Img=Img_r+Img_g+Img_b;
+Img2=Img_r+Img_g_original+Img_b;
+R=Img(:,:,1);
+G=rgb2gray(Img_g);%Img(:,:,2);
+B=Img(:,:,3);
+[H,W,c]=size(Img);
     
 %%Getting the intesities map from green image. Modify the contrast
 %%automatically
-
- G_he = histeq(G);
+G_he = histeq(G);
 
 % We modify G regarding intensity property. Get a treshold overlapping 3 diferent layers to obtein the most representative data. 
 J=adapthisteq(G);
@@ -87,9 +85,7 @@ for i=1:length(ind_no_cell)
 end
 BW=mask_openning;
 
-
-
-%% MORPHOLOGY. 
+%% Morphological operations
 
 % Fill holes
 BW = imfill(BW,'holes');
@@ -112,7 +108,6 @@ BW = bwareaopen(BW,Delete_artifacts);
 [Ix,Iy]=gradient(double(G));
 grad = sqrt(Ix.^2 + Iy.^2);
 
-
 D = bwdist(BW);
 DL = watershed(D);
 bgm = DL == 0;
@@ -122,29 +117,24 @@ contour_visual=1-im2double(contour_img);
 
 initial_mask=BW;
 
-
-
 %% Represent images: contour_visual, mascara inicial and contour_water
 %%(same nomenclature which Dani used (before me) to save images and variables)
 
-    %Create folder path to save files
-    path_img=(['..\..\Processed_images\' folder '\' name]);
-
     
-    PathFolder = [path_img '\Data_image'];
-    if isdir(PathFolder)~=1
+    PathFolder = fullfile(path_img, 'Data_image');
+    if ~isfolder(PathFolder
         mkdir(PathFolder)
     end
     
     %Save composite image
-    imwrite(Img2,[path_img '\' name '.jpg']);
+    imwrite(Img2,fullfile(PathFolder, [nameImage '.jpg']);
     
     %Save contour_img image
-    stringres=[PathFolder '\' name '_contour_img.jpg'];
+    stringres=fullfile(PathFolder, [nameImage '_contour_img.jpg']);
     imwrite(contour_visual,stringres)
     
     %Save first cellular mask
-    stringres=[PathFolder '\' name '_initial_mask.jpg'];
+    stringres=fullfile(PathFolder, [nameImage '_initial_mask.jpg']);
     imwrite(initial_mask,stringres)
 
 
@@ -153,11 +143,10 @@ initial_mask=BW;
     contour_water=bwlabel(contour_water);
 
     %Save contour_img of intercellular espace
-    stringres=[PathFolder '\' name '_water_contour_img.jpg'];
+    stringres=fullfile(PathFolder, [nameImage '_water_contour_img.jpg']);
     imwrite(contour_water,stringres)
 
-
-%% 1º watershed
+%% watershed
 
 %Represent cells
 white_index=find(contour_water==0);
@@ -172,7 +161,7 @@ B1(white_index)=255;
 RGB=cat(3,R1,G1,B1);
 
 %Save watershed image (real image + contour_img of intercellular espace)
-stringres=[PathFolder '\' name '_watershed.jpg'];
+stringres=fullfile(PathFolder, [nameImage '_watershed.jpg']);
 imwrite(RGB,stringres)
 
 
@@ -196,7 +185,7 @@ RGB_cont=cat(3,R1_cont,G1_cont,B1_cont);
 original_with_contour_img=RGB_cont;
 
 %Save contour_img line + real image
-stringres=[PathFolder '\' name '_real_contour_img.jpg'];
+stringres=fullfile(PathFolder, [nameImage '_real_contour_img.jpg']);
 imwrite(original_with_contour_img,stringres)
 
 
@@ -218,11 +207,11 @@ cells_img=bwlabel(1-contour_img,8);
 improved_mask=improved_mask.*cells_img;
 
 %Save improved mask
-stringres=[PathFolder '\' name '_improved_mask.jpg'];
+stringres=fullfile(PathFolder, [nameImage '_improved_mask.jpg']);
 imwrite(improved_mask,stringres)
 
 %%Saving necessary images to calculate the features
-stringres=[PathFolder '\Needed_images.mat'];
+stringres=fullfile(PathFolder, 'Needed_images.mat');
 save(stringres,'contour_img','contour_visual','contour_water','original_with_contour_img','improved_mask','initial_mask','cells_img');
 
 
