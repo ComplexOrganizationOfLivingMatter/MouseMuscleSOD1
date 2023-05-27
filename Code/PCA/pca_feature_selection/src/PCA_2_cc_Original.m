@@ -1,5 +1,5 @@
 %%PCA_2_cc
-function PCA_2_cc_Original(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
+function PCA_2_cc_Original(matrixT1,matrixT2,n_t1,n_t2,path2save,varargin)
 
     %Summary of process:
     % 1-Calculate 10 betters trios
@@ -15,7 +15,7 @@ function PCA_2_cc_Original(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
     %% Parameters Initialization
     %Selection of specified ccs
     if isempty(varargin)
-        totalCharactsIndexes=1:size(m_t1, 2); %num of columns
+        totalCharactsIndexes=1:size(matrixT1, 2); %num of columns
         indexesCcs=totalCharactsIndexes;
     else
         indexesCcs=varargin{1};
@@ -23,11 +23,9 @@ function PCA_2_cc_Original(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
     end
     %Asignation to groups by matrixes
     % Group 1
-    matrixT1=m_t1;
     nImgType1=size(matrixT1,1);
 
     % Group 2
-    matrixT2=m_t2;
     nImgType2=size(matrixT2,1);
 
     %All ccs matrix
@@ -84,9 +82,7 @@ function PCA_2_cc_Original(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
 
 
     %% Expansion
-
     expansionIndex=1;
-
 
     BettersPCAEachStep{1} = BetterPCAs;
     eigenvectorsEachStep{1} = best_eigenvectors;
@@ -129,6 +125,7 @@ function PCA_2_cc_Original(m_t1,m_t2,n_t1,n_t2,path2save,varargin)
     Proy = proyEachStep{numIter};
     Proy = Proy{numRow};
 
+    indexesCcsSelected(indexesCcsSelected==0)=[];
     indexesCcsSelected=indexesCcs(indexesCcsSelected);
     
 
