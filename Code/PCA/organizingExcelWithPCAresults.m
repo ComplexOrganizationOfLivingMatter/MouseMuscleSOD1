@@ -1,7 +1,7 @@
-rootPath='..\..\PCA_data\';
+rootPath=fullfile('..','..','PCA_data');
 
-pathPCAresults=[rootPath 'PCA_data_by_groups\13-Nov-2020\'];
-tableCcs=readtable('..\..\docs\list_67_ccs.xls');
+pathPCAresults=fullfile(rootPath,'PCA_data_by_groups','13-Nov-2020');
+tableCcs=readtable(fullfile('..','..','docs','list_67_ccs.xls'));
 listOfCcs=table2cell(tableCcs);
 
 load([rootPath 'Matrix_cc_13-Nov-2020.mat'])
@@ -130,5 +130,5 @@ for nPathFiles=1:length(groupOfPathFiles)
 
     end
     t = cell2table(excelStructure); 
-    writetable(t,[rootPath 'featuresSelectedPCA_' groupNames{nPathFiles} '_' date '.xls'], 'writevariablenames', false);
+    writetable(t,fullfile(rootPath, ['featuresSelectedPCA_' groupNames{nPathFiles} '_' date '.xls']), 'writevariablenames', false);
 end

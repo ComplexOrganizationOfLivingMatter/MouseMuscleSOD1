@@ -3,12 +3,10 @@ function [slow_cells,fast_cells,old_slow_cells,old_fast_cells]=pick_type_cells(f
 %Clicking over cells in the network image, we chage the type of cell. Click
 %over red dot cells(slow cells) -> slow cells become into fast cells. And vice versa  
 
-    path_folder=['..\..\Processed_images\' folder '\' name ];
-    
-    
-    
-    Img=imread([path_folder '\' name '.jpg']);
-    Img_network=imread([path_folder '\' name '_network.jpg']);
+    path_folder=fullfile(folder,name);
+
+    Img=imread(fullfile(path_folder,[name '.jpg']));
+    Img_network=imread(fullfile(path_folder,[name '_network.jpg']));
 
    
     R=Img(:,:,1);
@@ -53,7 +51,7 @@ function [slow_cells,fast_cells,old_slow_cells,old_fast_cells]=pick_type_cells(f
     slow_cells=unique(new_slow_cells);
     fast_cells=unique(new_fast_cells);
     
-    save([path_folder '\Data_image\slow_fast_cells_correction.mat'],'slow_cells','fast_cells','old_slow_cells','old_fast_cells')
+    save(fullfile(path_folder,'Data_image','slow_fast_cells_correction.mat'),'slow_cells','fast_cells','old_slow_cells','old_fast_cells')
     
     
 end

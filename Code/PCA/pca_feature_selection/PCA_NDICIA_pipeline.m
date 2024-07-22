@@ -1,8 +1,8 @@
 %Pipeline
 addpath('src')
 addpath('src\lib')
-load('..\..\..\PCA_data\Matrix_cc_13-Nov-2020.mat')
-path2save='..\..\..\PCA_data\PCA_data_by_groups\';
+load(fullfile('..','..','..','PCA_data','Matrix_cc_13-Nov-2020.mat'))
+path2save=fullfile('..','..','..','PCA_data','PCA_data_by_groups');
 
 
 indexesGeometricNetworkCcs=[1 2 7:16 23:36 41 42 47 48 53 54 59 60]; %34 features (no slow/fast fibres)

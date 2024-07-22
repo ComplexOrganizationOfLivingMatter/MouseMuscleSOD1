@@ -73,7 +73,6 @@ function [Mean_neighbors,Std_neighbors,Std_neighbors_of_slow,Std_neighbors_of_fa
         neighbors_network=neighs_real{n_cell};
 
         % Neighbors of slow and fast cells
-
         %Slow cells if conditions are true, and add a slow marker to Figure
         if ismember(n_cell,slow_cells)
             plot(round(centers(n_cell,1)),round(centers(n_cell,2)),'.r','MarkerSize',20)
@@ -133,8 +132,6 @@ function [Mean_neighbors,Std_neighbors,Std_neighbors_of_slow,Std_neighbors_of_fa
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 
     %CC17-22
     %Features slow cells - neighbors
@@ -289,7 +286,7 @@ function [Mean_neighbors,Std_neighbors,Std_neighbors_of_slow,Std_neighbors_of_fa
         Desv_dist_slow_slow=0;
     end
 
-    %CC63-CC64 && CC67-CC68
+    %CC63-CC64 [&& deprecated old version of CC67-CC68]
     if ~isempty(intersect(slow_cells,valid_cells)) && ~isempty(intersect(fast_cells,valid_cells)) 
         M2=Matrix_shortest_distances_all_nodes(intersect(fast_cells,valid_cells),intersect(slow_cells,valid_cells));
         Mean_dist_fast_slow=mean(M2(M2~=0));

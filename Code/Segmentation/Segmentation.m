@@ -4,7 +4,7 @@ function Segmentation(path_img)
 Noise_background=3000; % Delete noise
 Divide_cells=2; % Ratio used to divide cells
 Intercellular_espace=2; % Increase distances between cells, reduce artifacts and divide cells
-Delete_artifacts=12000; % It's depends of min size cell 
+Delete_artifacts=12000; % Min cell size 
 
 
 %% SEGMENTATION
@@ -18,14 +18,14 @@ Img_r=imread(fullfile(path_img, [nameImage 'r.jpg']));
 %If channel G is not necessary to be edited, we work with green
 %original channel
 Img_g_original=imread(fullfile(path_img, [nameImage 'g.jpg'])); 
-if exist(fullfile(path_img, [nameImage 'g_edited.jpg']),'file')==2
+if exist(fullfile(path_img, [nameImage 'g_edited.jpg']),'file')==2 %% g_edited is the image after proofreading
     Img_g=imread(fullfile(path_img, [nameImage 'g_edited.jpg']));
 else
     Img_g=Img_g_original;
 end
 
 %Any photos don't have DAPI
-if exist([path_img '\' name 'b.jpg'])==2
+if exist(fullfile(path_img,[nameImage 'b.jpg']),'file')==2
    Img_b=imread(fullfile(path_img, [nameImage 'b.jpg'])); 
 else
    Img_b=0;
@@ -37,11 +37,6 @@ Img2=Img_r+Img_g_original+Img_b;
 R=Img(:,:,1);
 G=rgb2gray(Img_g);%Img(:,:,2);
 B=Img(:,:,3);
-[H,W,c]=size(Img);
-    
-%%Getting the intesities map from green image. Modify the contrast
-%%automatically
-G_he = histeq(G);
 
 % We modify G regarding intensity property. Get a treshold overlapping 3 diferent layers to obtein the most representative data. 
 J=adapthisteq(G);
@@ -118,16 +113,15 @@ contour_visual=1-im2double(contour_img);
 initial_mask=BW;
 
 %% Represent images: contour_visual, mascara inicial and contour_water
-%%(same nomenclature which Dani used (before me) to save images and variables)
+%%(same nomenclature as Dani used (before I joined the lab) to save images and variables)
 
-    
     PathFolder = fullfile(path_img, 'Data_image');
-    if ~isfolder(PathFolder
+    if ~isfolder(PathFolder)
         mkdir(PathFolder)
     end
     
     %Save composite image
-    imwrite(Img2,fullfile(PathFolder, [nameImage '.jpg']);
+    imwrite(Img2,fullfile(PathFolder, [nameImage '.jpg']));
     
     %Save contour_img image
     stringres=fullfile(PathFolder, [nameImage '_contour_img.jpg']);

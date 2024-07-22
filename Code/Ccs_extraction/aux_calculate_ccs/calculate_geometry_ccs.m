@@ -1,8 +1,6 @@
 function [Mean_Area,Std_Area,Mean_slow_cells_area,Std_slow_cells_area,Mean_fast_cells_area,Std_fast_cells_area,Mean_major_axis,Mean_minor_axis,Mean_relation_axis,Std_relation_axis,Mean_Pix_convex_region,Std_Pix_convex_region,Mean_relation_areas,Std_relation_areas,Average_slow_cells,cell_area,major_axis,minor_axis,Pix_convex_region,Relation_valid_areas]=calculate_geometry_ccs(cellular_mask,Cells_Img,valid_cells,contour_watershed,slow_cells,fast_cells)
 
-%This is an auxiliar function to calculate geometry properties from our
-%images
-
+    %Function to calculate geometry properties from our segmented images
     % CC1 and CC2
     s=regionprops(Cells_Img,'Area');
     cell_area=cat(1,s.Area);
@@ -18,7 +16,7 @@ function [Mean_Area,Std_Area,Mean_slow_cells_area,Std_slow_cells_area,Mean_fast_
     n_slow_cells=length(slow_valid_cells);
     n_fast_cells=length(fast_valid_cells);
 
-    % CC69
+    % CC67
     Average_slow_cells=n_slow_cells/(n_fast_cells+n_slow_cells);
 
     % CC3-CC6

@@ -3,8 +3,8 @@ clear all
 close all
 
 addpath(genpath('src'))
-load('..\..\PCA_data\Matrix_cc_13-Nov-2020.mat')
-path2save='..\..\UMAP_data\UMAP_data_by_groups\';
+load(fullfile('..','..','PCA_data','Matrix_cc_13-Nov-2020.mat'))
+path2save=fullfile('..','..','UMAP_data','UMAP_data_by_groups');
 warning('off','all')
 if ~exist(path2save,'dir')
     mkdir(path2save)
@@ -57,7 +57,7 @@ for i=1:length(mat1)
         UMAP_NDICIA(m1(:,indexes34andAreas),m2(:,indexes34andAreas),name1{i},name2{i},path2save,indexes34andAreas,nRand);
         UMAP_NDICIA(m1(:,indexAllFeaturesNoDapi),m2(:,indexAllFeaturesNoDapi),name1{i},name2{i},path2save,indexAllFeaturesNoDapi,nRand);
 
-%         %include dapi ccs if > 60 days
+%         %include dapi ccs if > 60 days // CONSIDERING NUCLEI MARKERS
 %         if ~contains([name1{i},name2{i}],'60')
 %             UMAP_NDICIA(m1(:,indexAllFeatures),m2(:,indexAllFeatures),name1{i},name2{i},path2save,indexAllFeatures);
 %             UMAP_NDICIA(m1(:,indexesGeometricNetworkDapiCcs),m2(:,indexesGeometricNetworkDapiCcs),name1{i},name2{i},path2save,indexesGeometricNetworkDapiCcs);
@@ -95,7 +95,7 @@ for i=1:length(mat1)
         UMAP_NDICIA(m1(:,indexes34andAreas),[m2(:,indexes34andAreas),m3(:,indexes34andAreas)],name1{i},'G93A 120',path2save,indexes34andAreas,nRand);
         UMAP_NDICIA(m1(:,indexAllFeaturesNoDapi),[m2(:,indexAllFeaturesNoDapi),m3(:,indexAllFeaturesNoDapi)],name1{i},'G93A 120',path2save,indexAllFeaturesNoDapi,nRand);
         
-%         %include dapi ccs if > 60 days
+%         %include dapi ccs if > 60 days // CONSIDERING NUCLEI MARKERS
 %         if ~contains([name1{i},'G93A 120'],'60')
 %             UMAP_NDICIA(m1(:,indexAllFeatures),[m2(:,indexAllFeatures),m3(:,indexAllFeatures)],name1{i},'G93A 120',path2save,indexAllFeatures);
 %             UMAP_NDICIA(m1(:,indexesGeometricNetworkDapiCcs),[m2(:,indexesGeometricNetworkDapiCcs),m3(:,indexesGeometricNetworkDapiCcs)],name1{i},'G93A 120',path2save,indexesGeometricNetworkDapiCcs);

@@ -136,7 +136,7 @@ function PCA_2_cc_Original_Subgroups(m_t1,m_t2,m_t3,n_t1,n_t2,path2save,varargin
 
     indexesCcsSelected=indexesCcs(indexesCcsSelected);
     
-    save( [path2save 'PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs)], 'BettersPCAEachStep', 'Proy', 'bestPCA','indexesCcsSelected', 'eigenvectors')
+    save( fullfile(path2save, ['PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs)]), 'BettersPCAEachStep', 'Proy', 'bestPCA','indexesCcsSelected', 'eigenvectors')
 
     switch lower(n_t1(1:2))
         
@@ -186,8 +186,8 @@ function PCA_2_cc_Original_Subgroups(m_t1,m_t2,m_t3,n_t1,n_t2,path2save,varargin
     pause(2)
         
     F = getframe(h);
-    imwrite(F.cdata, [path2save 'PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs) '.tiff'],'Resolution', 300);
-    savefig(h,[path2save 'PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs) '.fig'])
+    imwrite(F.cdata, fullfile(path2save,['PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs) '.tiff']),'Resolution', 300);
+    savefig(h,fullfile(path2save,['PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs) '.fig']))
     
     disp(['PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs)])
     pause(10)

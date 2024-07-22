@@ -1,5 +1,5 @@
 %load('Matrix_cc_13-Nov-2020.mat')
-indexAllFeaturesNoDapi = [1:62,65:69]; %All 67 features 
+indexAllFeaturesNoDapi = [1:62,65:69]; %All 67 features. It is like that because features 63 and 64 were repeated when extracted.
 
 cellMatrices = {matrixCONT60;matrixCONT100;matrixCONT120;matrixG93A60;matrixG93A100;matrixG93A120;matrixG93A130};
 cellMatricesNoNan = cellfun(@(x) x(cellfun(@(y) ~(length(isnan(y))==1),x(:,1)),:),cellMatrices,'UniformOutput',false);
