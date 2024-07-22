@@ -32,7 +32,7 @@ All features extracted from each specific image are stored in `Matrix_cc_13-Nov-
 - The second cell column contains the raw values of the features ordered numerically (position 1 -> feature 1, position n -> feature n).
 
 #### Study Groups
-The following groups are used in this study ([DOI: 10.1101/2024.03.11.584407](https://doi.org/10.1101/2024.03.11.584407)). Only non-NaN paths were included:
+The following groups are used in our study - only non-NaN paths were included:
 
 - `matrixCONT60` (WT at ~60 days)
 - `matrixG93A60` (SOD1 G93A at ~60 days)
