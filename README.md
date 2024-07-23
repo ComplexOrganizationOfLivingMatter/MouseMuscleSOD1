@@ -4,6 +4,7 @@
 
 This repository contains the code and data for the analysis of muscle fibres in mice with different genotypes (including ALS) and ages. Follow the steps below to run or reproduce our analysis published under the title **Computational analysis of SOD1-G93A mouse muscle biomarkers for comprehensive assessment of ALS progression**, doi: https://doi.org/10.1101/2024.03.11.584407.
 
+![NDICIA pipeline SOD1](https://github.com/ComplexOrganizationOfLivingMatter/MouseMuscleSOD1/blob/master/fig%20pipeline.jpg)
 
 ## Steps to Run/Reproduce the Analysis
 
