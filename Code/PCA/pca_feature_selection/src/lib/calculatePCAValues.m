@@ -1,11 +1,9 @@
 function [W,eigenvectors,Ratio_pca]=calculatePCAValues(matrixChosenCcs,nIteration,nImgType1,nImgType2,W,eigenvectors,Ratio_pca,ccsChosen)
         
 
-        % W:weights
+        % W -> projection weights
         [W{1,nIteration}, eigenvectors{nIteration}] = pca_function(matrixChosenCcs);
         
-        %Proyections
-        W{1,nIteration}=Weights;  
 
         %% Getting numbers from method3 graphics (LUCIANO) and Storing PCA Ratio for chosen ccs
         label=[ones(1, nImgType1), 2*ones(1,nImgType2)];

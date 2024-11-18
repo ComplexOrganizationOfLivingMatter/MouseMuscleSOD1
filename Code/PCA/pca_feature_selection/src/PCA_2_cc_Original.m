@@ -140,15 +140,18 @@ function PCA_2_cc_Original(matrixT1,matrixT2,n_t1,n_t2,path2save,varargin)
             color1=[0,0,1];
         case 'g9'
             color1=[1,0,0];
+        otherwise
+            color1=[0,0,1];
     end
     
     switch lower(n_t2(1:2))
-        
         case 'wt'
             color2=[0,1,0];
         case 'co'
             color2=[0,0,1];
         case 'g9'
+            color2=[1,0,0];
+        otherwise
             color2=[1,0,0];
     end
     
