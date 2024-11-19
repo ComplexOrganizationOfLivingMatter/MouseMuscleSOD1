@@ -22,7 +22,7 @@ matrixG93A120concat = [matrixG93A120;matrixG93A130];
 indG93A120=find(cellfun(@(x) ~(length(isnan(x))==1),matrixG93A120concat(:,1)));
 
 %number of samples per group and number of experiments
-n_samples = 15;
+n_samples = 19;
 n_randomizations=1000;
 
 preliminaryMatGroupsA = {matrixCONT60,matrixCONT100,matrixCONT120};
@@ -83,6 +83,6 @@ for nDay=1:3
 
 end
 
-save(fullfile(path2saveRand,'PCA_Hom_18-Nov-2024.mat'),'BestPCA_value_rand','featuresSelected_rand');
-save(fullfile(path2saveHom,'PCA_Rand_18-Nov-2024.mat'),'BestPCA_value_hom','featuresSelected_hom');
+save(fullfile(path2saveRand,['PCA_' num2str(n_samples) '_samples_Rand_18-Nov-2024.mat']),'BestPCA_value_rand','featuresSelected_rand');
+save(fullfile(path2saveHom,['PCA_' num2str(n_samples) '_samples_Hom_18-Nov-2024.mat']),'BestPCA_value_hom','featuresSelected_hom');
 
