@@ -2,6 +2,7 @@ function [BetterPCAs,Proy, eigenvectorsF]=add_cc_original(BetterPCAs_bef,matrixA
 count=0;
 Niteration=1;
 BetterPCAs=[];
+BetterPCAs_bef(BetterPCAs_bef(:,1)==0,:)=[];
 for rowCCs=1:size(BetterPCAs_bef,1)
     W={};eigenvectors={};Ratio_pca=[];
     ccsRow=BetterPCAs_bef(rowCCs,2:size(BetterPCAs_bef,2));
@@ -20,13 +21,6 @@ for rowCCs=1:size(BetterPCAs_bef,1)
             else
                 %Include CC to CCs before
                 matrixChosenCcs=[matrixChosenCcs,matrixAllCCs(:,nCC)];
-
-                %normalize matrixes
-                for charac=1:size(matrixChosenCcs,2)
-                    matrixChosenCcs(:,charac)=matrixChosenCcs(:,charac)-min(matrixChosenCcs(:,charac));
-                    matrixChosenCcs(:,charac)=matrixChosenCcs(:,charac)/max(matrixChosenCcs(:,charac));
-                end
-                matrixChosenCcs(isnan(matrixChosenCcs))=0;% 0 NaNs
 
                 %% PCA
                 [W,eigenvectors,Ratio_pca]=calculatePCAValues(matrixChosenCcs,Niteration,nImgType1,nImgType2,W,eigenvectors,Ratio_pca,[ccsRow,nCC]);
@@ -49,15 +43,16 @@ for rowCCs=1:size(BetterPCAs_bef,1)
             
             %Checked former rows comparing with new row
             r=1;
-            while r<size(BetterPCAs,1)+1                  
+            while r<size(BetterPCAs,1)+1               
                 if length(find(sort(BetterPCAs(r,2:end))==sort(newPCARow(1,2:end))))==size(BetterPCAs,2)-1
                     auxiliar(1,maxPcaIndex)=0;
                     [~, maxPcaIndex]=max(auxiliar);
                     newPCARow=Ratio_pca(:,maxPcaIndex)';
-                    r=1;
-                else
-                    r=r+1;
+                    
+                % else
+                %     r=r+1;
                 end
+                r=r+1;
             end
             %add if different row exist
             if isempty(newPCARow)==0

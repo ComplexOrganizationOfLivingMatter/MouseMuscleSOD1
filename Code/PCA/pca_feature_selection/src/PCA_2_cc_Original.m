@@ -31,33 +31,43 @@ function PCA_2_cc_Original(matrixT1,matrixT2,n_t1,n_t2,path2save,varargin)
     %All ccs matrix
     matrixAllCCs=[matrixT1;matrixT2];
 
+    %normalize matrix each cc
+    for cc=1:size(matrixAllCCs,2)
+       matrixAllCCs(:,cc)=matrixAllCCs(:,cc)-min(matrixAllCCs(:,cc));
+       matrixAllCCs(:,cc)=matrixAllCCs(:,cc)/max(matrixAllCCs(:,cc));  
+    end
+    matrixAllCCs(isnan(matrixAllCCs))=0;% Do 0 all NaN
+    
     %Number of images and ccs
     n_images=nImgType1+nImgType2;
     n_totalCcs=length(totalCharactsIndexes);
-
 
     %Unitary matrix by type. A column by class
     unitaryMatrixByType=zeros([n_images,2]);
     unitaryMatrixByType(1:nImgType1,1)=1;
     unitaryMatrixByType(nImgType1+1:n_images,2)=1;
 
+
+    %initialize variables
+    W={};eigenvectors={};Ratio_pca=[];
+    % W_preNDICIA={};eigenvectors_preNDICIA={};Ratio_pca_preNDICIA=[];
+    % 
+    % %% Pre-NDICIA PCA
+    % [W_preNDICIA,eigenvectors_preNDICIA,Ratio_pca_preNDICIA]=calculatePCAValues(matrixAllCCs,nIteration,nImgType1,nImgType2,W_preNDICIA,eigenvectors_preNDICIA,Ratio_pca_preNDICIA,totalCharactsIndexes);
+    % 
+
     %% Calculate all trios of characteristics
     nIteration=1;
-    W={};eigenvectors={};Ratio_pca=[];
+    
+
+
+
     for cc1=1:n_totalCcs-2
         for cc2=cc1+1:n_totalCcs-1
             for cc3=cc2+1:n_totalCcs
                  %Include trio of ccs for all images
                  matrixChosenCcs(:,1:3)=[matrixAllCCs(:,cc1) ,matrixAllCCs(:,cc2),matrixAllCCs(:,cc3)];
 
-                 %Normalizing each cc
-                 for cc=1:3
-                    matrixChosenCcs(:,cc)=matrixChosenCcs(:,cc)-min(matrixChosenCcs(:,cc));
-                    matrixChosenCcs(:,cc)=matrixChosenCcs(:,cc)/max(matrixChosenCcs(:,cc));  
-                 end
-
-                 %3 cc for all images
-                 matrixChosenCcs(isnan(matrixChosenCcs))=0;% Do 0 all NaN
 
                 %Calculate proyections, eigenvectors and ratios of PCA
                 %accumulative
@@ -159,14 +169,14 @@ function PCA_2_cc_Original(matrixT1,matrixT2,n_t1,n_t2,path2save,varargin)
         color2=color1/2;
     end
     
-    %%Represent Luisma format
+    %% Represent Luisma format
     Proyecc=Proy;
     h=figure('Position', get(0, 'Screensize')); 
     plot(Proyecc(1,1:nImgType1),Proyecc(2,1:nImgType1),'.','Color',color1,'MarkerSize',45)
     hold on, plot(Proyecc(1,nImgType1+1:nImgType1+nImgType2),Proyecc(2,nImgType1+1:nImgType1+nImgType2),'.','Color',color2,'MarkerSize',45)
 
     %stringres=strcat(num2str(indexesCcsSelected));
-    stringres=strcat('PCA analysis selected features:',num2str(indexesCcsSelected),' Descriptor: ',num2str(bestPCA));
+    stringres=strcat('PCA analysis selected features:',num2str(indexesCcsSelected),' - Descriptor: ',num2str(bestPCA));
     title(stringres)
     legend(n_t1,n_t2, 'Location', 'bestoutside')
     set(gca,'FontSize', 20)
@@ -178,12 +188,36 @@ function PCA_2_cc_Original(matrixT1,matrixT2,n_t1,n_t2,path2save,varargin)
     
     disp(['PCA_' n_t1 '_' n_t2 '_selection_cc_' num2str(n_totalCcs)])
 
-    
     pause(10)
     
     clear F
     close(gcf)
     close all
-%     close(h)
+
+
+%     %% Plot all features PCA - prior to NDICIA pipeline
+%     Proyecc=W_preNDICIA{1};
+%     h=figure('Position', get(0, 'Screensize')); 
+%     plot(Proyecc(1,1:nImgType1),Proyecc(2,1:nImgType1),'.','Color',color1,'MarkerSize',45)
+%     hold on, plot(Proyecc(1,nImgType1+1:nImgType1+nImgType2),Proyecc(2,nImgType1+1:nImgType1+nImgType2),'.','Color',color2,'MarkerSize',45)
+% 
+%     %stringres=strcat(num2str(indexesCcsSelected));
+%     stringres=strcat('PCA analysis all features -',' Descriptor: ',num2str(Ratio_pca_preNDICIA(1)));
+%     title(stringres)
+%     legend(n_t1,n_t2, 'Location', 'bestoutside')
+%     set(gca,'FontSize', 20)
+%     set(gcf,'color','white')
+% 
+%     F = getframe(h);
+%     imwrite(F.cdata, fullfile(path2save,['PCA_' n_t1 '_' n_t2 '_preNDICIA_' num2str(n_totalCcs) '_features.tiff']),'Resolution', 300);
+%     savefig(h,fullfile(path2save, ['PCA_' n_t1 '_' n_t2 '_preNDICIA_' num2str(n_totalCcs) '_features.fig']))
+% 
+% 
+%     pause(10)
+% 
+%     clear F
+%     close(gcf)
+%     close all
+% %     close(h)
     
 end
