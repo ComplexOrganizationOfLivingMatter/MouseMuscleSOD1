@@ -1,9 +1,13 @@
 clear all 
 close all
-n_samples = 19;
+n_samples = 15;
 
 path2loadRand = fullfile('..','..','..','PCA_data','Randomization',['PCA_' num2str(n_samples) '_samples_Rand_18-Nov-2024.mat']);
 path2loadHom = fullfile('..','..','..','PCA_data','Homogeneous_size',['PCA_' num2str(n_samples) '_samples_Hom_18-Nov-2024.mat']);
+
+% path2loadRand = fullfile('..','..','..','PCA_data','Randomization_preselectedFeatures',['PCA_' num2str(n_samples) '_preselectedFeatures_samples_Rand_25-Nov-2024.mat']);
+% path2loadHom = fullfile('..','..','..','PCA_data','Homogeneous_size_preselectedFeatures',['PCA_' num2str(n_samples) '_preselectedFeatures_samples_Hom_25-Nov-2024.mat']);
+
 load(path2loadRand)
 load(path2loadHom)
 
@@ -15,7 +19,7 @@ for nDays=1:length(Days)
 
     % Sample data
     dist1 = BestPCA_value_rand(nDays,:); % Distribution 1
-    dist2 = BestPCA_value_hom(nDays,:) + 1; % Distribution 2 (shifted)
+    dist2 = BestPCA_value_hom(nDays,:); % Distribution 2 (shifted)
     
     % Define bin edges
     binEdges = 0:0.2:10; 
@@ -37,7 +41,9 @@ for nDays=1:length(Days)
     box on; grid on;
     
 
+    % outputFile=fullfile('..','..','..','PCA_data','Homogeneous_size_preselectedFeatures',[num2str(n_samples) ' samples'],  ['PCA_distribution_' num2str(n_samples) '_samples_' num2str(Days(nDays)) 'days']);
     outputFile=fullfile('..','..','..','PCA_data','Homogeneous_size',[num2str(n_samples) ' samples'],  ['PCA_distribution_' num2str(n_samples) '_samples_' num2str(Days(nDays)) 'days']);
+
     print(outputFile, '-dpng', '-r300'); % Save as PNG with 300 DPI resolution
     savefig(h,[outputFile '.fig'])
     pause(10)
@@ -52,17 +58,17 @@ for nDays=1:length(Days)
     [freqSorted, sortIdx] = sort(freq, 'descend');
     featuresSorted = uniqueFeatures(sortIdx);
     
-    % Highlight top 7
+    % Highlight top 3
     highlightIdx = 1:7;
     
     % Plot top 20 features
     h = figure;
-    bar(1:40, freqSorted(1:40), 'FaceColor', [0.7, 0.7, 0.7]); % Base color (gray)
+    bar(1:length(featuresSorted), freqSorted(1:length(featuresSorted)), 'FaceColor', [0.7, 0.7, 0.7]); % Base color (gray)
     hold on;
     bar(highlightIdx, freqSorted(highlightIdx), 'FaceColor', [0, 0.447, 0.741], 'FaceAlpha', 0.7) % Highlight top 7 (blue)
     
     % Annotate every bar
-    for i = 1:40
+    for i = 1:length(featuresSorted)
         text(i, freqSorted(i) + max(freqSorted) * 0.02, ...
              num2str(featuresSorted(i)), ...
              'HorizontalAlignment', 'center', ...
@@ -84,7 +90,9 @@ for nDays=1:length(Days)
     box on; grid on;
 
   
-    outputFile=fullfile('..','..','..','PCA_data','Homogeneous_size',[num2str(n_samples) ' samples'],  ['top3_featuresSelection_distribution_' num2str(n_samples) '_samples_' num2str(Days(nDays)) 'days']);
+    % outputFile=fullfile('..','..','..','PCA_data','Homogeneous_size_preselectedFeatures',[num2str(n_samples) ' samples'],  ['featuresSelection_distribution_' num2str(n_samples) '_samples_' num2str(Days(nDays)) 'days']);
+    outputFile=fullfile('..','..','..','PCA_data','Homogeneous_size',[num2str(n_samples) ' samples'],  ['featuresSelection_distribution_' num2str(n_samples) '_samples_' num2str(Days(nDays)) 'days']);
+
     print(outputFile, '-dpng', '-r300'); % Save as PNG with 300 DPI resolution
     savefig(h,[outputFile '.fig'])
 
